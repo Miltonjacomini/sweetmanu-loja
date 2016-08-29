@@ -41,9 +41,9 @@ public class JPAConfiguration
    {
       DriverManagerDataSource dataSource = new DriverManagerDataSource();
       dataSource.setDriverClassName("org.postgresql.Driver");
-      dataSource.setUrl("jdbc:postgresql://localhost/sweetmanu_db");
-      dataSource.setUsername("postgres");
-      dataSource.setPassword("1234");
+      dataSource.setUrl("jdbc:postgresql://ec2-54-243-54-21.compute-1.amazonaws.com/d78g8m1t8dfaip");
+      dataSource.setUsername("oxetxluwjvqxtu");
+      dataSource.setPassword("gGPmS5h6r8HFwlbHKKGQQgBcru");
       return dataSource;
    }
 
