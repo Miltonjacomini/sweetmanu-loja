@@ -1,5 +1,7 @@
 package br.com.sweetmanu.loja.conf;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
@@ -37,13 +39,15 @@ public class JPAConfiguration
    }
 
    @Bean
-   public DataSource dataSource(Environment environment)
+   public DataSource dataSource(Environment environment) throws URISyntaxException
    {
       DriverManagerDataSource dataSource = new DriverManagerDataSource();
       dataSource.setDriverClassName("org.postgresql.Driver");
-      dataSource.setUrl("jdbc:postgresql://ec2-54-243-54-21.compute-1.amazonaws.com/d78g8m1t8dfaip");
-      dataSource.setUsername("oxetxluwjvqxtu");
-      dataSource.setPassword("gGPmS5h6r8HFwlbHKKGQQgBcru");
+    
+      URI dbUrl = new URI(environment.getProperty("DATABASE_URL"));
+      dataSource.setUrl("jdbc:postgresql://"+ dbUrl.getHost()+":"+ dbUrl.getPort()+ dbUrl.getPath());
+      dataSource.setUsername(dbUrl.getUserInfo().split(":")[0]);
+      dataSource.setPassword(dbUrl.getUserInfo().split(":")[1]);
       return dataSource;
    }
 
