@@ -48,6 +48,12 @@ public class JPAConfiguration
       dataSource.setUrl("jdbc:postgresql://"+ dbUrl.getHost()+":"+ dbUrl.getPort()+ dbUrl.getPath());
       dataSource.setUsername(dbUrl.getUserInfo().split(":")[0]);
       dataSource.setPassword(dbUrl.getUserInfo().split(":")[1]);
+      
+   /*   dataSource.setUrl("jdbc:postgresql://localhost/sweetmanu_db");
+      dataSource.setUsername("postgres");
+      dataSource.setPassword("1234");*/
+      
+      
       return dataSource;
    }
 
