@@ -7,19 +7,22 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.sweetmanu.loja.controllers.HomeController;
 import br.com.sweetmanu.loja.daos.PessoaDao;
+import br.com.sweetmanu.loja.infra.FileSaver;
 import br.com.sweetmanu.loja.models.Pessoa;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackageClasses = { HomeController.class, PessoaDao.class, Pessoa.class })
+@ComponentScan(basePackageClasses = { HomeController.class, PessoaDao.class, Pessoa.class, FileSaver.class })
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
@@ -44,6 +47,11 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		formatterRegistrar.registerFormatters(conversionService);
 
 		return conversionService;
+	}
+	
+	@Bean
+	public MultipartResolver multipartResolver() {
+		return new StandardServletMultipartResolver();
 	}
 
 	@Override

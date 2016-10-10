@@ -16,67 +16,59 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-public class JPAConfiguration
-{
+public class JPAConfiguration {
 
-   @Bean
-   public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource)
-   {
-      LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-      em.setDataSource(dataSource);
-      em.setPackagesToScan(new String[] { "br.com.sweetmanu.loja.models" });
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(dataSource);
+		em.setPackagesToScan(new String[] { "br.com.sweetmanu.loja.models" });
 
-      JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-      em.setJpaVendorAdapter(vendorAdapter);
-      em.setJpaProperties(additionalProperties());
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(additionalProperties());
 
-      return em;
-   }
+		return em;
+	}
 
-   @Bean
-   public DataSource dataSource(Environment environment) throws URISyntaxException
-   {
-      DriverManagerDataSource dataSource = new DriverManagerDataSource();
-      dataSource.setDriverClassName("org.postgresql.Driver");
-    
-      URI dbUrl = new URI(environment.getProperty("DATABASE_URL"));
-      dataSource.setUrl("jdbc:postgresql://"+ dbUrl.getHost()+":"+ dbUrl.getPort()+ dbUrl.getPath());
-      dataSource.setUsername(dbUrl.getUserInfo().split(":")[0]);
-      dataSource.setPassword(dbUrl.getUserInfo().split(":")[1]);
-      
-   /*   dataSource.setUrl("jdbc:postgresql://localhost/sweetmanu_db");
-      dataSource.setUsername("postgres");
-      dataSource.setPassword("1234");*/
-      
-      
-      return dataSource;
-   }
+	@Bean
+	public DataSource dataSource(Environment environment) throws URISyntaxException {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("org.postgresql.Driver");
 
-   @Bean
-   public PlatformTransactionManager transactionManager(EntityManagerFactory emf)
-   {
-      JpaTransactionManager transactionManager = new JpaTransactionManager();
-      transactionManager.setEntityManagerFactory(emf);
-      return transactionManager;
-   }
+		URI dbUrl = new URI(environment.getProperty("DATABASE_URL"));
+		dataSource.setUrl("jdbc:postgresql://" + dbUrl.getHost() + ":" + dbUrl.getPort() + dbUrl.getPath());
+		dataSource.setUsername(dbUrl.getUserInfo().split(":")[0]);
+		dataSource.setPassword(dbUrl.getUserInfo().split(":")[1]);
 
-   @Bean
-   public PersistenceExceptionTranslationPostProcessor exceptionTranslation()
-   {
-      return new PersistenceExceptionTranslationPostProcessor();
-   }
+		/* Ambiente Teste
+		 dataSource.setUrl("jdbc:postgresql://localhost/sweetmanu_db");
+		 dataSource.setUsername("postgres"); 
+		 dataSource.setPassword("1234");
+		 */
 
-   Properties additionalProperties()
-   {
-      Properties properties = new Properties();
-      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-      properties.setProperty("hibernate.hbm2ddl.auto", "update");
-      properties.setProperty("hibernate.show_sql", "true");
-      return properties;
-   }
+		return dataSource;
+	}
+
+	@Bean
+	public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
+		return new JpaTransactionManager(emf);
+	}
+
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
+
+	Properties additionalProperties() {
+		Properties properties = new Properties();
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.setProperty("hibernate.show_sql", "true");
+		return properties;
+	}
 }

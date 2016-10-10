@@ -45,23 +45,23 @@
             </a>
             <ul class="dropdown-menu">
 	        	<li>
-	        		<a href="<c:url value='/product/form'/>"><span class="glyphicon glyphicon-plus-sign"></span> 
+	        		<a href="<c:url value='/produto/form'/>"><span class="glyphicon glyphicon-plus-sign"></span> 
 	        			Adicionar produto
 	        		</a>
 	        	</li>	              
              	<li>
-             		<a href="<c:url value='/product'/>"><span class="glyphicon glyphicon-menu-hamburger"></span>
+             		<a href="<c:url value='/produto'/>"><span class="glyphicon glyphicon-menu-hamburger"></span>
              			Lista produtos
              		</a>
              	</li>
 			  	<li role="separator" class="divider"></li>
               	<li>
-              		<a href="<c:url value='/category/form'/>"><span class="glyphicon glyphicon-plus-sign"></span>
+              		<a href="<c:url value='/categoria/form'/>"><span class="glyphicon glyphicon-plus-sign"></span>
               			Adicionar categoria
               		</a>
               	</li>	              
               	<li>
-              		<a href="<c:url value='/category'/>"><span class="glyphicon glyphicon-menu-hamburger"></span>
+              		<a href="<c:url value='/categoria'/>"><span class="glyphicon glyphicon-menu-hamburger"></span>
               			Lista categorias
               		</a>
               	</li>

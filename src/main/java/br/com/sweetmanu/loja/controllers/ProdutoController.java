@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.sweetmanu.loja.daos.CategoriaDao;
 import br.com.sweetmanu.loja.daos.ProdutoDao;
+import br.com.sweetmanu.loja.infra.FileSaver;
+import br.com.sweetmanu.loja.models.Foto;
 import br.com.sweetmanu.loja.models.Produto;
 
 @Controller
@@ -23,7 +26,8 @@ public class ProdutoController {
 
 	@Autowired
 	private ProdutoDao productDao;
-
+	@Autowired
+	private FileSaver fileSaver;
 	@Autowired
 	private CategoriaDao categoriaDao;
 
@@ -40,11 +44,17 @@ public class ProdutoController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView salvar(@Valid Produto produto, BindingResult bindingResult) {
+	public ModelAndView salvar(MultipartFile foto,@Valid Produto produto, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return form(produto);
 		}
+		
+		String caminho = fileSaver.write("produto-fotos", foto);
+		Foto novaFoto = new Foto(foto.getOriginalFilename(), caminho);
+		produto.getFotos().add(novaFoto);
+		
 		productDao.salvar(produto);
+
 		return new ModelAndView("redirect:/produto");
 	}
 
