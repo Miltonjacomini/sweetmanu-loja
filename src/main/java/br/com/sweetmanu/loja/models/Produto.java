@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,8 +27,10 @@ public class Produto {
 	@ManyToOne
 	private Categoria categoria;
 
-	@ElementCollection
-	private List<Foto> fotos;
+//	@ElementCollection
+//	private List<Foto> fotos;
+	@Embedded
+	private Foto foto;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "produto_id")
@@ -69,12 +71,12 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
-	public List<Foto> getFotos() {
-		return fotos;
+	public Foto getFoto() {
+		return foto;
 	}
 
-	public void setFotos(List<Foto> fotos) {
-		this.fotos = fotos;
+	public void setFoto(Foto foto) {
+		this.foto = foto;
 	}
 
 	public List<Item> getItens() {

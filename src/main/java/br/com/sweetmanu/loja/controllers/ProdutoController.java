@@ -51,7 +51,7 @@ public class ProdutoController {
 		
 		String caminho = fileSaver.write("produto-fotos", foto);
 		Foto novaFoto = new Foto(foto.getOriginalFilename(), caminho);
-		produto.getFotos().add(novaFoto);
+		produto.setFoto(novaFoto);
 		
 		productDao.salvar(produto);
 
