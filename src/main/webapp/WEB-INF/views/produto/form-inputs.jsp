@@ -38,3 +38,12 @@
 		<form:errors path='categoria.id' />
 	</div>
 </div>
+<div class="form-group">
+	<label for="foto">Foto</label>
+	<div class="input-group">
+		<span class="input-group-addon"><i
+			class="glyphicon glyphicon-unchecked"></i></span>
+		<input type="file" name="foto">
+		<form:errors path='foto' />
+	</div>
+</div>
