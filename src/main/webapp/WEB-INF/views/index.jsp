@@ -36,7 +36,7 @@
 <div id="wrapper-header">
 	<div id="main-header" class="object">
 		<div class="logo">
-			<img src="/resources/assets/img/logo-burst.png" alt="logo sweetmanu" height="38" width="90">
+			<img src="<c:out value="${pageContext.request.contextPath}"/>/resources/assets/img/logo-burst.png" alt="logo sweetmanu" height="38" width="90">
 		</div>
     </div>
 </div>
