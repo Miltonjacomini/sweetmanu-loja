@@ -3,7 +3,6 @@ package br.com.sweetmanu.loja.models;
 import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,18 +15,17 @@ public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String descricao;
 
 	@ManyToOne
 	private Tipo tipo;
 	private BigDecimal valor;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Produto produto;
-	
-	@Embedded
-	private Foto foto;
+
+	private String foto;
 
 	/* GETTERS AND SETTERS */
 	public Integer getId() {
@@ -70,11 +68,11 @@ public class Item {
 		this.valor = valor;
 	}
 
-	public Foto getFoto() {
+	public String getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Foto foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 
@@ -102,5 +100,5 @@ public class Item {
 			return false;
 		return true;
 	}
-	
+
 }

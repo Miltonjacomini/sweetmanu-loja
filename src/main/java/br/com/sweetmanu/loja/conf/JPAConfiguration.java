@@ -40,16 +40,16 @@ public class JPAConfiguration {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
 
-		URI dbUrl = new URI(environment.getProperty("DATABASE_URL"));
+		/*URI dbUrl = new URI(environment.getProperty("DATABASE_URL"));
 		dataSource.setUrl("jdbc:postgresql://" + dbUrl.getHost() + ":" + dbUrl.getPort() + dbUrl.getPath());
 		dataSource.setUsername(dbUrl.getUserInfo().split(":")[0]);
 		dataSource.setPassword(dbUrl.getUserInfo().split(":")[1]);
-
-		/* Ambiente Teste
+*/
+//		 Ambiente Teste
 		 dataSource.setUrl("jdbc:postgresql://localhost/sweetmanu_db");
 		 dataSource.setUsername("postgres"); 
 		 dataSource.setPassword("1234");
-		 */
+		 
 
 		return dataSource;
 	}

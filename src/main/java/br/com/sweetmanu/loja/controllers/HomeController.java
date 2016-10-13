@@ -9,7 +9,6 @@ import br.com.sweetmanu.loja.daos.ProdutoDao;
 
 @Controller
 public class HomeController {
-
 	
 	@Autowired
 	private ProdutoDao productDao;
@@ -19,5 +18,10 @@ public class HomeController {
 		ModelAndView modelAndView = new ModelAndView("index");
 		modelAndView.addObject("produtos", productDao.all());
 		return modelAndView;
+	}
+	
+	@RequestMapping("/indexAdmin")
+	public String indexAdmin() {
+		return "indexAdmin";
 	}
 }

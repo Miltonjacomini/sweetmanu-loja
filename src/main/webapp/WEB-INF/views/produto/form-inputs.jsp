@@ -43,7 +43,6 @@
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
-		<input type="file" name="foto">
-		<form:errors path='foto' />
+		<input name="foto" type="file">
 	</div>
 </div>
