@@ -37,7 +37,7 @@
 	<div id="main-header" class="object">
 		<div class="logo">
 			<img alt="logo sweetmanu" height="38" width="90" 
-				src="<c:url value='/resources/assets/img/logo-burst.png'/>">
+				src="/resources/assets/img/logo-burst.png">
 		</div>
     </div>
 </div>
@@ -66,7 +66,7 @@
             <div id="wrapper-bouton-icon">
             	<div id="bouton-premium">
             		<a href="<c:url value='/indexAdmin'/>">
-            			<img src="${contextPath}/resources/assets/img/icon-premium.svg" alt="administracao"
+            			<img src="/resources/assets/img/icon-premium.svg" alt="administracao"
             				 title="Administração" height="28" width="28">
             		</a>
             	</div>
