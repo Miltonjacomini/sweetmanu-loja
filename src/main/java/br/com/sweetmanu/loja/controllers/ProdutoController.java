@@ -66,8 +66,11 @@ public class ProdutoController {
 		 * String pathFoto = fileSaver.write("produto-fotos", foto);
 		 * produto.setPathFoto(pathFoto);
 		 */
-		service.uploadFile(foto, produto.getNome().trim());
-		produto.setPathFoto(produto.getNome().trim());
+		String nomeFoto = produto.getNome()+foto.getOriginalFilename().substring(foto.getOriginalFilename().indexOf("."),
+				foto.getOriginalFilename().length()).replaceAll(" ", "");
+		service.uploadFile(foto, nomeFoto);
+		produto.setPathFoto(nomeFoto);
+
 		productDao.salvar(produto);
 
 		return new ModelAndView("redirect:/produto");
