@@ -13,7 +13,7 @@
 
 						<c:forEach items="${produtos}" var="produto">
 							<figure class="white">
-								<a href="">
+								<a href="<c:url value='/produto/detalhe'/>/${produto.id}">
 									<img src="https://s3-sa-east-1.amazonaws.com/sweetmanu-uploads/${produto.pathFoto}" 
 										alt="${produto.nome}" />
 									<dl>

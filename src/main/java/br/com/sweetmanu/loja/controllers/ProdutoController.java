@@ -108,4 +108,13 @@ public class ProdutoController {
 		productDao.atualizar(produto);
 		return new ModelAndView("redirect:/produto");
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/detalhe/{id}")
+	public ModelAndView detalhe(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView("produto/detalhe");
+		modelAndView.addObject("produto", productDao.findById(id));
+		carregarDependencias(modelAndView);
+		return modelAndView;
+	}
+	
 }
