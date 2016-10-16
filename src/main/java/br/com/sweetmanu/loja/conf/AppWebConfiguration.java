@@ -1,14 +1,10 @@
 package br.com.sweetmanu.loja.conf;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
@@ -37,12 +33,6 @@ import br.com.sweetmanu.loja.service.AwsS3Service;
 @ComponentScan(basePackageClasses = { HomeController.class, PessoaDao.class, Pessoa.class, FileSaver.class, AwsS3Service.class })
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
-	@Value("${aws_access_key_id}")
-	private String awsId;
-	
-	@Value("${aws_secret_access_key}")
-	private String awsKey;
-	
 	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -91,17 +81,8 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
-		PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
-		ppc.setLocations(new Resource[] { 
-				new ClassPathResource("/aws.properties") 
-		});
-		return ppc;
-	}
-	
-	@Bean
 	public AWSCredentials credential(){
-		return new BasicAWSCredentials(awsId, awsKey);
+		return new BasicAWSCredentials(System.getenv("AWS_ACESS_KEY_ID"), System.getenv("AWS_SECRET_ACESS_KEY"));
 	}
 	
 	@Bean
