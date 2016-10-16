@@ -1,10 +1,14 @@
 package br.com.sweetmanu.loja.conf;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
@@ -17,6 +21,11 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+
 import br.com.sweetmanu.loja.controllers.HomeController;
 import br.com.sweetmanu.loja.daos.PessoaDao;
 import br.com.sweetmanu.loja.infra.FileSaver;
@@ -27,6 +36,13 @@ import br.com.sweetmanu.loja.models.Pessoa;
 @ComponentScan(basePackageClasses = { HomeController.class, PessoaDao.class, Pessoa.class, FileSaver.class })
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
+	@Value("${aws_access_key_id}")
+	private String awsId;
+	
+	@Value("${aws_secret_access_key}")
+	private String awsKey;
+	
+	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
@@ -72,4 +88,24 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
+	
+	@Bean
+	public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
+		PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
+		ppc.setLocations(new Resource[] { 
+				new ClassPathResource("/aws.properties") 
+		});
+		return ppc;
+	}
+	
+	@Bean
+	public AWSCredentials credential(){
+		return new BasicAWSCredentials(awsId, awsKey);
+	}
+	
+	@Bean
+	public AmazonS3 s3Client(){
+		return new AmazonS3Client(credential());
+	}
+	
 }

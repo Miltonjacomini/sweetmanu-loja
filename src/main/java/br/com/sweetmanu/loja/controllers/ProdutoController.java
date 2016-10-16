@@ -17,8 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.sweetmanu.loja.daos.CategoriaDao;
 import br.com.sweetmanu.loja.daos.ProdutoDao;
-import br.com.sweetmanu.loja.infra.FileSaver;
 import br.com.sweetmanu.loja.models.Produto;
+import br.com.sweetmanu.loja.service.AwsS3Service;
 import br.com.sweetmanu.loja.validation.PaginatedListValidation;
 import br.com.sweetmanu.loja.validation.ProdutoValidation;
 
@@ -30,7 +30,7 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoDao productDao;
 	@Autowired
-	private FileSaver fileSaver;
+	private AwsS3Service service;
 	@Autowired
 	private CategoriaDao categoriaDao;
 	
@@ -62,9 +62,10 @@ public class ProdutoController {
 			return form(produto);
 		}
 
-		String pathFoto = fileSaver.write("produto-fotos", foto);
-		produto.setPathFoto(pathFoto);
-
+		/*String pathFoto = fileSaver.write("produto-fotos", foto);
+		produto.setPathFoto(pathFoto);*/
+		service.uploadFile(foto, foto.getOriginalFilename());
+		produto.setPathFoto(foto.getOriginalFilename());
 		productDao.salvar(produto);
 
 		return new ModelAndView("redirect:/produto");
