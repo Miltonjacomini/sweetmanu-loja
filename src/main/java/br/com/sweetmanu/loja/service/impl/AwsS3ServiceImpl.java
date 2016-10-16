@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,8 +22,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	@Autowired
 	private AmazonS3 s3Client;
 
-	@Value("${aws_namecard_bucket}")
-	private String nameBucket;
+	private String nameBucket = System.getenv("AWS_BUCKET_NAME");
 
 	public S3Object uploadFile(MultipartFile file, String fileName) {
 
