@@ -1,7 +1,6 @@
 package br.com.sweetmanu.loja.conf;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,8 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		 
 */
 		http.authorizeRequests()
-		.antMatchers("/produto/**").permitAll()
-		.antMatchers(HttpMethod.POST,"/produto/**").hasRole("ADMIN")
+		.antMatchers("/produto/**").hasRole("ADMIN")
 		.antMatchers("/pessoa/**").hasRole("ADMIN")
 		.antMatchers("/categoria/**").hasRole("ADMIN")
 		.antMatchers("/produto-fotos/**").permitAll()

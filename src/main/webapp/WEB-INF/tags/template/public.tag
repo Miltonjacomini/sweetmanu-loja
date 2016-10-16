@@ -72,9 +72,7 @@
     </div>
 
 	<!-- CORPO DA PAGINA -->
-	<div class="container-fluid">
-		<jsp:doBody />
-	</div>
+	<jsp:doBody />
          
     <div id="wrapper-oldnew">
     	<div class="oldnew">
