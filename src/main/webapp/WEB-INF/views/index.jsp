@@ -36,8 +36,8 @@
 <div id="wrapper-header">
 	<div id="main-header" class="object">
 		<div class="logo">
-			<img alt="logo sweetmanu" height="38" width="90" 
-				src="/resources/assets/img/logo-burst.png">
+			<img alt="logo sweetmanu" height="38" width="90"
+				src="<c:url value='/resources/assets/img/logo-burst.png'/>"> 
 		</div>
     </div>
 </div>
@@ -66,7 +66,8 @@
             <div id="wrapper-bouton-icon">
             	<div id="bouton-premium">
             		<a href="<c:url value='/indexAdmin'/>">
-            			<img src="/resources/assets/img/icon-premium.svg" alt="administracao"
+            			<img src="<c:url value='/resources/assets/img/icon-premium.svg'/>"
+            			 	 alt="administracao"
             				 title="Administração" height="28" width="28">
             		</a>
             	</div>
@@ -86,8 +87,8 @@
 
 						<c:forEach items="${produtos}" var="produto">
 							<figure class="white">
-								<a href="${contextPath}">
-									<img src="${contextPath}${produto.pathFoto}" alt="${produto.nome}" />
+								<a href="">
+									<img src="https://s3-sa-east-1.amazonaws.com/sweetmanu-uploads/${produto.pathFoto}" alt="${produto.nome}" />
 									<dl>
 										<dt>${produto.nome}</dt>
 										<dd>${produto.descricao}</dd>	

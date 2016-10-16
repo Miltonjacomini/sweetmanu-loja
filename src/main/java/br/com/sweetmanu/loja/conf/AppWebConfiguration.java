@@ -30,10 +30,11 @@ import br.com.sweetmanu.loja.controllers.HomeController;
 import br.com.sweetmanu.loja.daos.PessoaDao;
 import br.com.sweetmanu.loja.infra.FileSaver;
 import br.com.sweetmanu.loja.models.Pessoa;
+import br.com.sweetmanu.loja.service.AwsS3Service;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackageClasses = { HomeController.class, PessoaDao.class, Pessoa.class, FileSaver.class })
+@ComponentScan(basePackageClasses = { HomeController.class, PessoaDao.class, Pessoa.class, FileSaver.class, AwsS3Service.class })
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Value("${aws_access_key_id}")
@@ -64,7 +65,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 		messageSource.setBasename("/WEB-INF/messages");
 		messageSource.setDefaultEncoding("UTF-8");
-		messageSource.setCacheSeconds(1);
+		messageSource.setCacheSeconds(10000);
 
 		return messageSource;
 	}

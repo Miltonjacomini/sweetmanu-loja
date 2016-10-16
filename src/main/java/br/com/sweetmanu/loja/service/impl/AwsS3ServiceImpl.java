@@ -28,17 +28,15 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 
 	public S3Object uploadFile(MultipartFile file, String fileName) {
 
-		String fileNameInS3 = fileName;
-
 		try {
 		
 			InputStream is;
 			is = file.getInputStream();
 
-			s3Client.putObject(new PutObjectRequest(nameBucket, fileNameInS3, is, new ObjectMetadata())
+			s3Client.putObject(new PutObjectRequest(nameBucket, fileName, is, new ObjectMetadata())
 					.withCannedAcl(CannedAccessControlList.PublicRead));
 
-			S3Object s3object = s3Client.getObject(new GetObjectRequest(nameBucket, fileNameInS3));
+			S3Object s3object = s3Client.getObject(new GetObjectRequest(nameBucket, fileName));
 			
 			return s3object;
 			

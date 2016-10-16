@@ -33,14 +33,14 @@ public class ProdutoController {
 	private AwsS3Service service;
 	@Autowired
 	private CategoriaDao categoriaDao;
-	
+
 	@InitBinder("produto")
-	public void InitBinderProduto(WebDataBinder binder){
+	public void InitBinderProduto(WebDataBinder binder) {
 		binder.addValidators(new ProdutoValidation());
 	}
-	
+
 	@InitBinder("paginatedList")
-	public void InitBinderPaginatedList(WebDataBinder binder){
+	public void InitBinderPaginatedList(WebDataBinder binder) {
 		binder.addValidators(new PaginatedListValidation());
 	}
 
@@ -62,8 +62,10 @@ public class ProdutoController {
 			return form(produto);
 		}
 
-		/*String pathFoto = fileSaver.write("produto-fotos", foto);
-		produto.setPathFoto(pathFoto);*/
+		/*
+		 * String pathFoto = fileSaver.write("produto-fotos", foto);
+		 * produto.setPathFoto(pathFoto);
+		 */
 		service.uploadFile(foto, foto.getOriginalFilename());
 		produto.setPathFoto(foto.getOriginalFilename());
 		productDao.salvar(produto);

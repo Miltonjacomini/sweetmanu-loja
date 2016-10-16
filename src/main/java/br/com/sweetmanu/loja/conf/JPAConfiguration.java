@@ -46,7 +46,7 @@ public class JPAConfiguration {
 		dataSource.setPassword(dbUrl.getUserInfo().split(":")[1]);
 
 //		 Ambiente Teste
-/*		 dataSource.setUrl("jdbc:postgresql://localhost/sweetmanu_db");
+		 /*dataSource.setUrl("jdbc:postgresql://localhost/sweetmanu_db");
 		 dataSource.setUsername("postgres"); 
 		 dataSource.setPassword("1234");*/
 		 
