@@ -56,13 +56,13 @@
              	</li>
 			  	<li role="separator" class="divider"></li>
               	<li>
-              		<a href="<c:url value='/categoria/form'/>"><span class="glyphicon glyphicon-plus-sign"></span>
-              			Adicionar categoria
+              		<a href="<c:url value='/produtoTipo/form'/>"><span class="glyphicon glyphicon-plus-sign"></span>
+              			Adicionar tipo produto
               		</a>
               	</li>	              
               	<li>
-              		<a href="<c:url value='/categoria'/>"><span class="glyphicon glyphicon-menu-hamburger"></span>
-              			Lista categorias
+              		<a href="<c:url value='/produtoTipo'/>"><span class="glyphicon glyphicon-menu-hamburger"></span>
+              			Lista tipos
               		</a>
               	</li>
               	<li role="separator" class="divider"></li>
