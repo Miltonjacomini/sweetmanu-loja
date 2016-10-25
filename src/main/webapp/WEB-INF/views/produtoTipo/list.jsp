@@ -43,7 +43,7 @@
 		  <template:paginationComponent paginatedList="${paginatedList}" page="${param.page}" action="/produtoTipo"/>
           <a href="<c:url value='/produtoTipo/form'/>" class="btn btn-success">
           	<span class="glyphicon glyphicon-plus-sign"></span> 
-         		Nova
+         		Novo
           </a>
         </div>
     </div>

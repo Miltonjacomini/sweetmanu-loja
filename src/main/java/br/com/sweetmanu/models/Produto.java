@@ -2,8 +2,10 @@ package br.com.sweetmanu.models;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +30,7 @@ public class Produto {
 	@Column(name="DESCRICAO", nullable=false)
 	private String descricao;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.DETACH)
 	private ProdutoTipo produtoTipo;
 
 	@Column(name="PATH_FOTO")

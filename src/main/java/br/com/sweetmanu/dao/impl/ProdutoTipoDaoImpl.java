@@ -30,8 +30,8 @@ public class ProdutoTipoDaoImpl implements ProdutoTipoDao {
 		return manager.find(ProdutoTipo.class, id);
 	}
 
-	public void remover(ProdutoTipo produtoTipo) {
-		manager.remove(produtoTipo);
+	public void remover(Integer id) {
+		manager.remove(findById(id));
 	}
 
 	public void atualizar(ProdutoTipo produtoTipo) {

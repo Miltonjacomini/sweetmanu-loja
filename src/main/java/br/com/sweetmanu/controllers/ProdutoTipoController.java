@@ -53,13 +53,12 @@ public class ProdutoTipoController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/remover/{id}")
 	public String remover(@PathVariable("id") Integer id) {
-		ProdutoTipo produtoTipo = produtoTipoDao.findById(id);
-		produtoTipoDao.remover(produtoTipo);
+		produtoTipoDao.remover(id);
 		return "redirect:/produtoTipo";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}")
-	public ModelAndView atualizar(@PathVariable("id") Integer id, @Valid ProdutoTipo produtoTipo, 
+	public ModelAndView atualizar(@PathVariable("id") Integer id, @Valid ProdutoTipo produtoTipo,
 			BindingResult bindingResult) {
 		produtoTipo.setId(id);
 		if (bindingResult.hasErrors()) {

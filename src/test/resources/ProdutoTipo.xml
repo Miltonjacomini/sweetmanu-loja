@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<produto_tipo id="1" NOME="Brigadeiro" />
+	<produto_tipo id="2" NOME="Bem casado" />
+	<produto_tipo id="3" NOME="Bolo" />
+</dataset>

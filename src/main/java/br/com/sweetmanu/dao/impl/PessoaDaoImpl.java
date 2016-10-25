@@ -30,8 +30,8 @@ public class PessoaDaoImpl implements PessoaDao {
 		return manager.find(Pessoa.class, id);
 	}
 
-	public void remover(Pessoa pessoa) {
-		manager.remove(pessoa);
+	public void remover(Integer id) {
+		manager.remove(findById(id));
 	}
 
 	public void atualizar(Pessoa pessoa) {

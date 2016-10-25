@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<produto id="1" NOME="Brigadeiro" DESCRICAO="Brigadeiro delicinha da Sweet" VALOR="5.0">
+	<produto id="1" NOME="Brigadeiro" DESCRICAO="Brigadeiro delicinha da Sweet"
+		VALOR="5.0">
 		<produto_tipo id="1" NOME="Brigadeiro" />
 	</produto>
-	
-	<produto id="2" NOME="Bem casado" DESCRICAO="Bem casado Sweet" VALOR="5.0">
+
+	<produto id="2" NOME="Bem casado" DESCRICAO="Bem casado Sweet"
+		VALOR="5.0" >
 		<produto_tipo id="2" NOME="Bem casado" />
 	</produto>
-	
-	<produto id="3" NOME="Bolo de coco" DESCRICAO="Bolinho de coco gelado" VALOR="5.0">
+
+	<produto id="3" NOME="Bolo de coco" DESCRICAO="Bolinho de coco gelado"
+		VALOR="5.0" >
 		<produto_tipo id="3" NOME="Bolo" />
 	</produto>
 </dataset>

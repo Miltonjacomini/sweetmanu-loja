@@ -4,42 +4,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PEDIDO")
+@Table(name = "PEDIDO")
 public class Pedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@OneToOne(cascade=CascadeType.ALL, optional=false, fetch=FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	private Pessoa cliente;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="PRODUTO_ID")
+	@ManyToOne
+	private Pessoa pessoa;
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Produto> produtos = new ArrayList<Produto>();
-	
-	@Embedded
+
+	@Enumerated(EnumType.STRING)
 	private PedidoStatus status;
 
 	public Pedido() {
 	}
 
-	public Pedido(Pessoa cliente) {
-		this.cliente = cliente;
+	public Pedido(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	public void addProduto(Produto produto) {
@@ -47,8 +44,8 @@ public class Pedido {
 	}
 
 	/* GETTERS AND SETTERS */
-	public Pessoa getCliente() {
-		return cliente;
+	public Pessoa getPessoa() {
+		return pessoa;
 	}
 
 	public List<Produto> getProdutos() {
@@ -98,6 +95,6 @@ public class Pedido {
 
 	@Override
 	public String toString() {
-		return "Pedido [id=" + id + ", cliente=" + cliente + ", status=" + status + ", produtos=" + produtos + "]";
+		return "Pedido [id=" + id + ", pessoa=" + pessoa + ", status=" + status + ", produtos=" + produtos + "]";
 	}
 }

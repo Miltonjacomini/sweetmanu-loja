@@ -4,7 +4,7 @@
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
 <!DOCTYPE html>
-<html >
+<html>
 <head>
   <meta charset="UTF-8">
   <title>SweetManu</title>
@@ -12,7 +12,9 @@
   <!-- bootstrap -->
   <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>">
   <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-theme.min.css'/>">
-
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="icon" type="image/png" href="<c:url value='/resources/assets/img/small-logo-01.png'/>">
   <!-- style -->
    <link rel="stylesheet" href="<c:url value='/resources/css/index.css'/>">
    <link rel="stylesheet" href="<c:url value='/resources/css/forms.css'/>">

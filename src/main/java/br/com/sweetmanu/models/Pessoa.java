@@ -1,11 +1,11 @@
 package br.com.sweetmanu.models;
 
-import java.util.Calendar;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,41 +16,44 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="PESSOA")
+@Table(name = "PESSOA")
 public class Pessoa {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Size(min=3, max=50)
-	@Column(name="NOME", nullable=false)
+	@Size(min = 3, max = 50)
+	@Column(name = "NOME", nullable = false)
 	private String nome;
-	
-	@Size(min=11, max=14)
-	@Column(name="CPF_CNPJ", nullable=false)
+
+	@Size(min = 11, max = 14)
+	@Column(name = "CPF_CNPJ", nullable = false)
 	private String cpfCnpj;
 
 	@NotNull
-	@DateTimeFormat(pattern="dd/MM/yyyy") 
-	@Column(name="DT_NASC", nullable=false)
-	private Calendar dtNascimento;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name = "DT_NASC", nullable = false)
+	private LocalDate dtNascimento;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false, 
-			fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name="email", nullable=false)
+	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "email", nullable = false)
 	private Usuario usuario;
 
 	@Embedded
 	private Contato contato;
-	@Embedded
-	private Genero genero;
+	
 	@Embedded
 	private Endereco endereco;
 
+	@Enumerated(EnumType.STRING)
+	private Genero genero;
+
+	
 	/* GETTERS AND SETTERS */
 	public String getNome() {
 		return nome;
@@ -84,11 +87,11 @@ public class Pessoa {
 		this.cpfCnpj = cpfCnpj;
 	}
 
-	public Calendar getDtNascimento() {
+	public LocalDate getDtNascimento() {
 		return dtNascimento;
 	}
 
-	public void setDtNascimento(Calendar dtNascimento) {
+	public void setDtNascimento(LocalDate dtNascimento) {
 		this.dtNascimento = dtNascimento;
 	}
 

@@ -25,12 +25,17 @@ public class PedidoDaoImpl implements PedidoDao {
 		return manager.find(Pedido.class, id);
 	}
 
+	public List<Pedido> findByStatus(PedidoStatus status) {
+		return manager.createQuery("select p from Pedido p where p.status = :status", Pedido.class)
+				.setParameter("status", status).getResultList();
+	}
+
 	public void salvar(Pedido pedido) {
 		manager.persist(pedido);
 	}
 
-	public void remover(Pedido pedido) {
-		manager.remove(pedido);
+	public void remover(Integer id) {
+		manager.remove(findById(id));
 	}
 
 	public void atualizar(Pedido pedido) {
@@ -43,9 +48,9 @@ public class PedidoDaoImpl implements PedidoDao {
 	}
 
 	public void confirmaPedido(Pedido pedido) {
-		if (pedido.getCliente().getId() != null) {
+		if (pedido.getPessoa().getId() != null) {
 			Pedido pedidoAConfirmar = findById(pedido.getId());
-			if (pedidoAConfirmar != null) {
+			if (pedidoAConfirmar != null && pedidoAConfirmar.getStatus().equals(PedidoStatus.ENVIADO)) {
 				pedidoAConfirmar.setStatus(PedidoStatus.CONFIRMADO);
 				salvar(pedidoAConfirmar);
 			} else {
@@ -56,9 +61,9 @@ public class PedidoDaoImpl implements PedidoDao {
 
 	public void pedidoEntregue(Pedido pedido) {
 
-		if (pedido.getCliente().getId() != null) {
+		if (pedido.getPessoa().getId() != null) {
 			Pedido pedidoEntregue = findById(pedido.getId());
-			if (pedidoEntregue != null) {
+			if (pedidoEntregue != null && pedidoEntregue.getStatus().equals(PedidoStatus.FINALIZADO)) {
 				pedidoEntregue.setStatus(PedidoStatus.ENTREGUE);
 				salvar(pedidoEntregue);
 			} else {
@@ -70,24 +75,24 @@ public class PedidoDaoImpl implements PedidoDao {
 
 	public void pedidoEmPreparo(Pedido pedido) {
 
-		if (pedido.getCliente().getId() != null) {
+		if (pedido.getPessoa().getId() != null) {
 			Pedido pedidoEntregue = findById(pedido.getId());
-			if (pedidoEntregue != null) {
+			if (pedidoEntregue != null && pedidoEntregue.getStatus().equals(PedidoStatus.CONFIRMADO)) {
 				pedidoEntregue.setStatus(PedidoStatus.EM_PREPARO);
 				salvar(pedidoEntregue);
 			} else {
-				System.out.println("Pedido não encontrado!");
+				System.out.println("Pedido não encontrado ou não está confirmado!");
 			}
 		}
 	}
 
 	public void pedidoFinalizado(Pedido pedido) {
 
-		if (pedido.getCliente().getId() != null) {
-			Pedido pedidoEntregue = findById(pedido.getId());
-			if (pedidoEntregue != null) {
-				pedidoEntregue.setStatus(PedidoStatus.FINALIZADO);
-				salvar(pedidoEntregue);
+		if (pedido.getPessoa().getId() != null) {
+			Pedido pedidoFinalizado = findById(pedido.getId());
+			if (pedidoFinalizado != null && pedidoFinalizado.getStatus().equals(PedidoStatus.EM_PREPARO)) {
+				pedidoFinalizado.setStatus(PedidoStatus.FINALIZADO);
+				salvar(pedidoFinalizado);
 			} else {
 				System.out.println("Pedido não encontrado!");
 			}

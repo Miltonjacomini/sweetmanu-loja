@@ -61,8 +61,7 @@ public class PessoaController {
 	// just because get is easier here. Be my guest if you want to change.
 	@RequestMapping(method = RequestMethod.GET, value = "/remove/{id}")
 	public String remover(@PathVariable("id") Integer id) {
-		Pessoa pessoa = pessoaDao.findById(id);
-		pessoaDao.remover(pessoa);
+		pessoaDao.remover(id);
 		return "redirect:/pessoa";
 	}
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<usuario EMAIL="milton@gaiasistemas.com" SENHA="123456">
+		<pessoa id="1" NOME="Milton J. Neto" CPF_CNPJ="36655584655" DT_NASC="1989-11-04" EMAIL="milton@gaiasistemas.com" />
+	</usuario>
+</dataset>

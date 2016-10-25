@@ -2,15 +2,15 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib tagdir="/WEB-INF/tags/template" prefix="template"%>
 <template:public>
-	<!-- PORTFOLIO -->
-	<div id="wrapper-container">
-    
-		<div class="container object">
-
-			<div id="main-container-image">
-                       
+	<jsp:body>
+		<!-- PORTFOLIO -->
+		<div id="wrapper-container">
+			
+			<div class="container object">
+				
+				<div id="main-container-image">
+						
 					<section class="work">
-
 						<c:forEach items="${produtos}" var="produto">
 							<figure class="white">
 								<a href="<c:url value='/produto/detalhe'/>/${produto.id}">
@@ -26,11 +26,12 @@
 								</div>
 	                        </figure>	
 						</c:forEach>
-                        
 					</section>
-                    
-				</div>	
-            	    
+					
+				</div>
+					
 			</div>
-	</div>
+			
+		</div>
+	</jsp:body>
 </template:public>

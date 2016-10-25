@@ -19,22 +19,13 @@ public class ProdutoDaoTest extends EntityDaoImplTest {
 	@Autowired
 	ProdutoTipoDao produtoTipoDao;
 	
+	/* Caso de mais de um dataSet (mapeando diferentes classes e separando os xml) */
 	@Override
 	protected IDataSet getDataSet() throws Exception {
 		IDataSet dataSet = new FlatXmlDataSet(this.getClass().getClassLoader().getResourceAsStream("Produto.xml"));
 		return dataSet;
 	}
 
-	/* Caso de mais de um dataSet (mapeando diferentes classes e separando os xml)
-	@Override
-	protected IDataSet getDataSet() throws Exception {
-		IDataSet[] dataSets = new IDataSet[] {
-			FlatXmlDataSet(this.getClass().getClassLoader().getResourceAsStream("Produto.xml")),
-			FlatXmlDataSet(this.getClass().getClassLoader().getResourceAsStream("ProdutoTipo.xml"))
-		};
-		return new CompositeDataSet(dataSets);
-	}
-	*/
 	@Test
 	public void findById(){
 		Assert.assertNotNull(produtoDao.findById(1));

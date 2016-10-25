@@ -13,7 +13,7 @@ public interface ProdutoTipoDao {
 
 	public ProdutoTipo findById(Integer id);
 
-	public void remover(ProdutoTipo produtoTipo);
+	public void remover(Integer id);
 	
 	public void atualizar(ProdutoTipo produtoTipo);
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	
+	<pedido_produto pedido_id="1" produtos_id="1" />
+	<pedido_produto pedido_id="1" produtos_id="2" />
+	<pedido_produto pedido_id="1" produtos_id="3" />
+	
+</dataset>

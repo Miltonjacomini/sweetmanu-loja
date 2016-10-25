@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+	<pedido id="1" STATUS="ENVIADO" PESSOA_ID="1">
+		<pedido_produto pedido_id="1" produtos_id="1" />
+	</pedido>
+
+	<pedido id="2" STATUS="ENVIADO" PESSOA_ID="1">
+		<pedido_produto pedido_id="2" produtos_id="2" />
+	</pedido>
+
+	<pedido id="3" STATUS="ENVIADO" PESSOA_ID="1">
+		<pedido_produto pedido_id="3" produtos_id="3" />
+	</pedido>
+
+</dataset>

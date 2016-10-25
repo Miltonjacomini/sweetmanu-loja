@@ -3,6 +3,7 @@ package br.com.sweetmanu.dao;
 import java.util.List;
 
 import br.com.sweetmanu.models.Pedido;
+import br.com.sweetmanu.models.PedidoStatus;
 
 public interface PedidoDao {
 
@@ -10,9 +11,11 @@ public interface PedidoDao {
 
 	public Pedido findById(Integer id);
 
+	public List<Pedido> findByStatus(PedidoStatus status);
+
 	public void salvar(Pedido pedido);
 
-	public void remover(Pedido pedido);
+	public void remover(Integer id);
 
 	public void atualizar(Pedido pedido);
 
@@ -25,5 +28,5 @@ public interface PedidoDao {
 	public void pedidoEmPreparo(Pedido pedido);
 
 	public void pedidoFinalizado(Pedido pedido);
-	
+
 }

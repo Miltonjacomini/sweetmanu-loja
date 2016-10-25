@@ -13,7 +13,7 @@ public interface PessoaDao {
 
 	public Pessoa findById(Integer id);
 	
-	public void remover(Pessoa pessoa);
+	public void remover(Integer id);
 
 	public void atualizar(Pessoa pessoa);
 

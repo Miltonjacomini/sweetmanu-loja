@@ -5,7 +5,7 @@
 	<div class="input-group">
 		<span class="input-group-addon">
 			<i class="glyphicon glyphicon-unchecked"></i></span>
-		<form:input path='nome' type='text' />
+		<form:input path='nome' type='text' autofocus="autofocus"/>
 		<form:errors path='nome' />
 	</div>
 </div>
