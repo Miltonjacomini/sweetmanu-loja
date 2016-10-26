@@ -39,6 +39,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
 		resolver.setExposedContextBeanNames("homeController");
+		resolver.setExposedContextBeanNames("carrinhoCompras");
 
 		return resolver;
 	}
@@ -49,7 +50,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 		messageSource.setBasename("/WEB-INF/messages");
 		messageSource.setDefaultEncoding("UTF-8");
-		messageSource.setCacheSeconds(10000);
+		messageSource.setCacheSeconds(10);
 
 		return messageSource;
 	}

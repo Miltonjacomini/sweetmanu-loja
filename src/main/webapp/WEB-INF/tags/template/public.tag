@@ -35,18 +35,28 @@
 	<div id="wrapper-navbar">
 		<div class="navbar object">
     		<div id="wrapper-sorting">
-	            <div id="wrapper-title-1">
-	            <div class="top-rated object">Home</div>
-	            	<div id="fleche-nav-1"></div>
+    			<div id="wrapper-title-1">
+		            <a href="<c:url value='/'/>">
+		            	<div class="top-rated object">
+		            		Home
+		            	</div>
+		            	<div id="fleche-nav-1"></div>
+		            </a>
 	    		</div>
-	            
 	            <div id="wrapper-title-2">
-	            <a href="#"><div class="recent object">Sobre nós</div></a>
+		            <a href="#">
+		            	<div class="recent object">
+		            		Sobre nós
+		            	</div>
+		            </a>
 	                <div id="fleche-nav-2"></div>
 	    		</div>
-	            
 	            <div id="wrapper-title-3">
-	            <a href="#"><div class="oldies object">Portfólio</div></a>
+	            	<a href="#">
+	            		<div class="oldies object">
+	            			Portfólio
+	            		</div>
+	            	</a>
 	                <div id="fleche-nav-3"></div>
 	    		</div>
             </div>

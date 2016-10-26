@@ -89,6 +89,10 @@ public class Produto {
 		this.valor = valor;
 	}
 
+	public BigDecimal getTotal(int quantidade) {
+		return this.getValor().multiply(new BigDecimal(quantidade));
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

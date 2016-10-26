@@ -184,15 +184,6 @@ body,html{
 
 .top-rated:hover,.recent:hover,.oldies:hover{color:#666;opacity:1;}
 
-#fleche-nav-1,#fleche-nav-2,#fleche-nav-3{
-	float:left;
-	margin-top:26px;
-	background: url(img/fleche-nav.svg) no-repeat ;
-	width:5px;
-	height:10px;
-	margin-left:5px;
-}
-
 #fleche-nav-2,#fleche-nav-3{opacity:0.5;}
 
 #wrapper-bouton-icon{display:block;}
@@ -506,15 +497,6 @@ body,html{
 	width:50%;
 }
 
-#oldnew-prev,#oldnew-next{
-	width:43px;
-	height:43px;
-	opacity:0.5;
-	cursor:pointer;
-}
-
-#oldnew-next{background: url(img/next.svg) no-repeat;margin-left:25px;float:left;}
-#oldnew-prev{background: url(img/prev.svg) no-repeat;margin-right:25px;float:right;}
 
 /*----------------------------*/
 /* FOOTER */
@@ -719,7 +701,7 @@ body,html{
 }
 }
 
-/* Small viewports — Old monitors, netbooks, tablets (landscape), etc. */
+/* Small viewports ï¿½ Old monitors, netbooks, tablets (landscape), etc. */
  
 @media only screen and (max-width: 965px) {
 #main-header,.navbar,.container,.container-footer,.thank,.oldnew,.copyright {
@@ -757,7 +739,7 @@ body,html{
 }
 }
 
-/* Smaller viewports — more tablets, old monitors */
+/* Smaller viewports ï¿½ more tablets, old monitors */
  
 @media only screen and (max-width: 860px) {
 #main-header,.navbar,.container,.container-footer,.thank,.oldnew,.copyright {
@@ -769,7 +751,7 @@ body,html{
 }
 }
 
-/* Even smaller viewports — more tablets, etc. */
+/* Even smaller viewports ï¿½ more tablets, etc. */
  
 @media only screen and (max-width: 740px) {
 #main-header,.navbar,.container,.container-footer,.thank,.oldnew,.copyright {
@@ -839,4 +821,10 @@ body,html{
 @media only screen and (max-width: 320px) {
 
 }
-
+.table-remove {
+  color: #700;
+  cursor: pointer;
+}
+.table-remove:hover {
+  color: #f00;
+}
