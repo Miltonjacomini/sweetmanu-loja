@@ -22,17 +22,16 @@
 				        <th>Remover</th>
 				      </tr>
 		
-					  <c:forEach items="${carrinhoCompras.itens}" var="item">
+					  <c:forEach items='${carrinhoCompras.itens}' var='item'>
 					  	<tr>	
 							<td>${item.nome}</td>
 					        <td>${item.produtoTipo.nome}</td>
 					        <td>${item.valor}</td>
 					        <td>${carrinhoCompras.getQuantidade(item)}</td>
 					        <td>
-					        	<form action="${s:mvcUrl('CCC#remover').arg(0, item.id).build()}" method="POST">
-					          		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
-					          		<input type="submit" class="table-remove glyphicon glyphicon-remove" />
-					          	</form>
+				          		<a href="<c:url value='/carrinho/remover'/>/${item.id}">
+				          			<span class="table-remove glyphicon glyphicon-remove"></span>
+				          		</a>
 					        </td>
 				      	</tr>
 					  </c:forEach>

@@ -43,3 +43,6 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.page-header {
+	padding-bottom:9px;margin:40px 0 20px;
+}

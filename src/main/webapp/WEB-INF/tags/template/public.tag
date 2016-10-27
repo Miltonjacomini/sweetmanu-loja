@@ -21,18 +21,14 @@
 </head>
 
 <body>
-	<!-- HEADER -->
-	<div id="wrapper-header">
+	<!-- NAVBAR -->
+	<div id="wrapper-navbar">
 		<div id="main-header" class="object">
 			<div class="logo">
 				<img alt="logo sweetmanu" height="38" width="90"
 					src="<c:url value='/resources/assets/img/logo-burst.png'/>"> 
 			</div>
 	    </div>
-	</div>
-
-	<!-- NAVBAR -->
-	<div id="wrapper-navbar">
 		<div class="navbar object">
     		<div id="wrapper-sorting">
     			<div id="wrapper-title-1">
