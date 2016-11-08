@@ -1,130 +1,125 @@
+<%@attribute name="extraScripts" fragment="true"%>
+<%@attribute name="extraStyles" fragment="true"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>SweetManu</title>
-	
-	<!-- bootstrap -->
-	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>">
-	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-theme.min.css'/>">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/png" href="<c:url value='/resources/img/favicon.png'/>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SweetManu - Doces Gourmet, Salgados e Afins">
+    <meta name="author" content="Milton Jacomini Neto">
 
-	<!-- Behavioral Meta Data -->
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="icon" type="image/png" href="<c:url value='/resources/assets/img/small-logo-01.png'/>">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,900,900italic,700italic,700,500italic,400italic,500,300italic,300' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-	<link rel='stylesheet' type='text/css' href="<c:url value='/resources/assets/css/style.css'/>">
+    <title>SweetManu</title>
 
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
+    <jsp:invoke fragment="extraStyles"/>
 </head>
 
 <body>
-	<!-- NAVBAR -->
-	<div id="wrapper-navbar">
-		<div id="main-header" class="object">
-			<div class="logo">
-				<img alt="logo sweetmanu" height="38" width="90"
-					src="<c:url value='/resources/assets/img/logo-burst.png'/>"> 
-			</div>
-	    </div>
-		<div class="navbar object">
-    		<div id="wrapper-sorting">
-    			<div id="wrapper-title-1">
-		            <a href="<c:url value='/'/>">
-		            	<div class="top-rated object">
-		            		Home
-		            	</div>
-		            	<div id="fleche-nav-1"></div>
-		            </a>
-	    		</div>
-	            <div id="wrapper-title-2">
-		            <a href="#">
-		            	<div class="recent object">
-		            		Sobre nós
-		            	</div>
-		            </a>
-	                <div id="fleche-nav-2"></div>
-	    		</div>
-	            <div id="wrapper-title-3">
-	            	<a href="#">
-	            		<div class="oldies object">
-	            			Portfólio
-	            		</div>
-	            	</a>
-	                <div id="fleche-nav-3"></div>
-	    		</div>
+    <div class="navbar navbar-fixed-top navbar-default">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" style="float: left;" class="pull-left btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="brand" href="<c:url value='/'/>">
+                  <img alt="logo sweetmanu" height="220" width="210"
+                       src="<c:url value='/resources/img/sweetmanu-topo.png'/>">
+                </a>
+
+                <div class="nav-collapse">
+                    <ul class="nav navbar-nav menu-text">
+                        <li> <a href="<c:url value='/'/>">HOME</a></li>
+                        <li> <a href="#">SOBRE NÓS</a></li>
+                        <li> <a href="#">LOJA</a></li>
+                        <li> <a href="#">CONTATO</a></li>
+                    </ul>
+                </div>
+
+                <sec:authorize access="hasRole('ROLE_CLIENTE')">
+               	<div class="logout navbar-text pull-right">
+	                (
+	                <a href="<c:url value='/logout'/>"> 
+	        			logout
+	        		</a>
+	        		)
+        		</div>
+        		</sec:authorize>
+        		<a href="<c:url value='/minhaConta'/>">
+                  <span class="navbar-text pull-right">MINHA CONTA</span>
+                </a>
+                <a href="<c:url value='/carrinho'/>">
+                  <span class="navbar-text pull-right">CARRINHO</span>
+                </a>
             </div>
-            
-            <div id="wrapper-bouton-icon">
-            	<div id="bouton-premium">
-            		<a href="<c:url value='/indexAdmin'/>">
-            			<img src="<c:url value='/resources/assets/img/icon-premium.svg'/>"
-            			 	 alt="administracao"
-            				 title="Administração" height="28" width="28">
-            		</a>
-            	</div>
-			</div>
-    	</div>
+        </div>
     </div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel-messages">
+					<c:if test="${messageSuccess != null}">
+			            <div class="alert alert-success alert-dismissable">
+				            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			                ${messageSuccess}
+			            </div>
+		            </c:if>
+		            <c:if test="${message != null}">
+			            <div class="alert alert-info alert-dismissable">
+				            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			                ${message}
+			            </div>
+		            </c:if>
+		            <c:if test="${messageWarning != null}">
+			            <div class="alert alert-warning alert-dismissable">
+				            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			                ${messageWarning}
+			            </div>
+		            </c:if>
+		            <c:if test="${messageError != null}">
+			            <div class="alert alert-danger alert-dismissable">
+		   		            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			                ${messageError}
+			            </div>
+		            </c:if>
+		        </div>
+        	</div>
+        </div>
+	</div>
 
 	<!-- CORPO DA PAGINA -->
 	<jsp:doBody />
          
-    <div id="wrapper-oldnew">
-    	<div class="oldnew">
-        	<div class="wrapper-oldnew-prev">
-            	<div id="oldnew-prev"></div>
-        	</div>
-            <div class="wrapper-oldnew-next">
-            	<div id="oldnew-next"></div>
-    		</div>
-        </div>
-	</div>     
-            
-	<div id="wrapper-thank">
-    	<div class="thank">
-        	<div class="thank-text">Sweet<span style="letter-spacing:-5px;"></span>Manu</div>
-    	</div>
-	</div>
-	    
-    <div id="wrapper-copyright">
-		<div class="copyright">
-    		<div class="copy-text object">
-    			<a style="color:#D0D1D4;" href="http://sweetmanu.com.br">
-    				SweetManu
-    			</a> 
-    			- Todos os direitos reservados.
-    		</div>
-    		
-			<div class="wrapper-navbouton">
-    			<div class="google object">g</div>
-    			<div class="facebook object">f</div>
-    			<div class="linkin object">i</div>
-    			<div class="dribbble object">d</div>
-    		</div>
-    	</div> 
+    <div class="container">
+        <hr>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>SweetManu todos os direitos reservados, Desenvolvido por Gaia Sistemas</p>
+                </div>
+            </div>
+        </footer>
     </div>
+    <!-- /.container -->
 
-</div>
-
-
-
-<!-- SCRIPT -->
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="<c:url value='/resources/assets/js/jquery.scrollTo.min.js'/>"></script>
-	<script src="<c:url value='/resources/assets/js/jquery.localScroll.min.js'/>"></script>
-	<script src="<c:url value='/resources/assets/js/jquery-animate-css-rotate-scale.js'/>"></script>
-	<script src="<c:url value='/resources/assets/js/fastclick.min.js'/>"></script>
-	<script src="<c:url value='/resources/assets/js/jquery.animate-colors-min.js'/>"></script>
-	<script src="<c:url value='/resources/assets/js/jquery.animate-shadow-min.js'/>"></script>
-	<script src="<c:url value='/resources/assets/js/main.js'/>"></script>
-	
-
-
+    <!-- jQuery -->
+	<script src="<c:url value='/resources/js/jquery.js'/>"></script>
+	 <!-- jQuery MAsk -->
+	<script src="<c:url value='/resources/js/jquery.mask.min.js'/>"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
+	<jsp:invoke fragment="extraScripts"/>
 </body>
-
 
 </html>

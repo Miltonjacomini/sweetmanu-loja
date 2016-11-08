@@ -5,13 +5,17 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sweetmanu.dao.PaginatorQueryHelper;
 import br.com.sweetmanu.dao.PessoaDao;
 import br.com.sweetmanu.models.PaginatedList;
 import br.com.sweetmanu.models.Pessoa;
+import br.com.sweetmanu.models.Role;
 
+@Transactional
 @Repository("pessoaDao")
 public class PessoaDaoImpl implements PessoaDao {
 
@@ -23,6 +27,9 @@ public class PessoaDaoImpl implements PessoaDao {
 	}
 
 	public void salvar(Pessoa pessoa) {
+		pessoa.getUsuario().addRole(Role.ROLE_CLIENTE);
+		String senha = BCrypt.hashpw(pessoa.getUsuario().getSenha(), BCrypt.gensalt());
+		pessoa.getUsuario().setSenha(senha);
 		manager.persist(pessoa);
 	}
 
@@ -30,6 +37,11 @@ public class PessoaDaoImpl implements PessoaDao {
 		return manager.find(Pessoa.class, id);
 	}
 
+	public Pessoa findByEmail(String email) {
+		return manager.createQuery("select p from Pessoa p where p.usuario.email = :email", Pessoa.class)
+				   	  .setParameter("email", email).getSingleResult();
+	}
+	
 	public void remover(Integer id) {
 		manager.remove(findById(id));
 	}

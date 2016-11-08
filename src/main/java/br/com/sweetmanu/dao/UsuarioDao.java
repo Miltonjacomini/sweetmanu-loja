@@ -5,5 +5,7 @@ import br.com.sweetmanu.models.Usuario;
 public interface UsuarioDao {
 
 	public Usuario loadUserByUsername(String email);
+
+	public void salvarUsuario(Usuario usuario);
 	
 }

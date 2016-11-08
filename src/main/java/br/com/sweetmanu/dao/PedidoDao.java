@@ -12,6 +12,8 @@ public interface PedidoDao {
 	public Pedido findById(Integer id);
 
 	public List<Pedido> findByStatus(PedidoStatus status);
+	
+	public List<Pedido> findByPessoa(Integer pessoaId);
 
 	public void salvar(Pedido pedido);
 
@@ -28,5 +30,7 @@ public interface PedidoDao {
 	public void pedidoEmPreparo(Pedido pedido);
 
 	public void pedidoFinalizado(Pedido pedido);
+
+	public boolean cancelar(Pedido pedido);
 
 }

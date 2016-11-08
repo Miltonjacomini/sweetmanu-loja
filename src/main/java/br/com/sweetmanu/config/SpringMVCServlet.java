@@ -7,6 +7,8 @@ import javax.servlet.ServletRegistration.Dynamic;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import br.com.sweetmanu.filter.ErrorHandleFilter;
+
 public class SpringMVCServlet extends AbstractAnnotationConfigDispatcherServletInitializer {
 
    @Override
@@ -31,7 +33,7 @@ public class SpringMVCServlet extends AbstractAnnotationConfigDispatcherServletI
 	protected Filter[] getServletFilters() {
 		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
 		encodingFilter.setEncoding("UTF-8");
-		return new Filter[] { encodingFilter };
+		return new Filter[] { encodingFilter, new ErrorHandleFilter() };
 	}
 
 	@Override

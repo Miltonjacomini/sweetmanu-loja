@@ -1,18 +1,22 @@
 package br.com.sweetmanu.models;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,23 +30,46 @@ public class Pedido {
 	@ManyToOne
 	private Pessoa pessoa;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany
+	@JoinTable(name = "pedido_produtos", joinColumns = { @JoinColumn(name = "pedido_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "produto_id") })
 	private List<Produto> produtos = new ArrayList<Produto>();
 
 	@Enumerated(EnumType.STRING)
 	private PedidoStatus status;
 
+	@Column(name = "DT_CRIACAO")
+	private LocalDate dtCriacao;
+
 	public Pedido() {
+		this.dtCriacao = LocalDate.now();
 	}
 
 	public Pedido(Pessoa pessoa) {
 		this.pessoa = pessoa;
+		this.dtCriacao = LocalDate.now();
 	}
 
-	public void addProduto(Produto produto) {
-		produtos.add(produto);
+	public void addProduto(Produto produto, int quantidade) {
+		IntStream.range(0, quantidade).forEach( p -> {
+			produtos.add(produto);
+		});
 	}
 
+	public BigDecimal getValorTotal(List<Produto> produtos) {
+		BigDecimal valorTotal = produtos.stream().map(Produto::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
+		return valorTotal;
+	}
+
+	public Integer getQuantidadeProduto(Produto produto){
+		int soma = 0;
+		for(Produto pro : produtos){
+			if(pro.getId() == produto.getId())
+				soma++;
+		}
+		return soma;
+	}
+	
 	/* GETTERS AND SETTERS */
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -66,6 +93,14 @@ public class Pedido {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public LocalDate getDtCriacao() {
+		return dtCriacao;
+	}
+
+	public void setDtCriacao(LocalDate dtCriacao) {
+		this.dtCriacao = dtCriacao;
 	}
 
 	@Override

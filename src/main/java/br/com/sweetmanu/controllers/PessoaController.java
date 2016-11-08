@@ -23,15 +23,15 @@ public class PessoaController {
 	@Autowired
 	private PessoaDao pessoaDao;
 
+	private ModelAndView loadFormDependencies(ModelAndView modelAndView) {
+		// modelAndView.addObject("categoryList", categoryDao.all());
+		return modelAndView;
+	}
+
 	@RequestMapping("/form")
 	public ModelAndView form(Pessoa pessoa) {
 		ModelAndView modelAndView = new ModelAndView("pessoa/form-add");
 		return loadFormDependencies(modelAndView);
-	}
-
-	private ModelAndView loadFormDependencies(ModelAndView modelAndView) {
-		// modelAndView.addObject("categoryList", categoryDao.all());
-		return modelAndView;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -66,14 +66,14 @@ public class PessoaController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}")
-	public ModelAndView atualizar(@PathVariable("id") Integer id, @Valid Pessoa pessoa, 
-			BindingResult bindingResult) {
+	public ModelAndView atualizar(@PathVariable("id") Integer id, @Valid Pessoa pessoa, BindingResult bindingResult) {
 		pessoa.setId(id);
 		if (bindingResult.hasErrors()) {
 			return loadFormDependencies(new ModelAndView("pessoa/form-update"));
 		}
-		
+
 		pessoaDao.atualizar(pessoa);
 		return new ModelAndView("redirect:/pessoa");
 	}
+
 }

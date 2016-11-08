@@ -18,13 +18,19 @@ public class PedidoDaoImpl implements PedidoDao {
 	private EntityManager manager;
 
 	public List<Pedido> all() {
-		return manager.createQuery("select p from Pedido p", Pedido.class).getResultList();
+		return manager.createQuery("select distinct p from Pedido p JOIN FETCH p.produtos", Pedido.class).getResultList();
 	}
 
 	public Pedido findById(Integer id) {
 		return manager.find(Pedido.class, id);
 	}
 
+	public List<Pedido> findByPessoa(Integer pessoaId) {
+		return manager.createQuery("select distinct p from Pedido p JOIN FETCH p.produtos where p.pessoa.id = :id and p.status != 'CANCELADO'", Pedido.class)
+					  .setParameter("id", pessoaId)
+					  .getResultList();
+	}
+	
 	public List<Pedido> findByStatus(PedidoStatus status) {
 		return manager.createQuery("select p from Pedido p where p.status = :status", Pedido.class)
 				.setParameter("status", status).getResultList();
@@ -98,4 +104,12 @@ public class PedidoDaoImpl implements PedidoDao {
 			}
 		}
 	}
+
+	@Override
+	public boolean cancelar(Pedido pedido) {
+		pedido.setStatus(PedidoStatus.CANCELADO);
+		salvar(pedido);
+		return true;
+	}
+	
 }

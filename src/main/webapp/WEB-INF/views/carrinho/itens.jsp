@@ -7,40 +7,46 @@
 	<div id="wrapper-container">
 			<div class="container object">
 				<div class="row">
-					<div class="col-lg-10">
-						<h2 class="page-header">Carrinho de compras</h2>
+					<div class="col-lg-9">
+						<h2>Carrinho de compras</h2>
 					</div>
-					<div class="col-lg-2" style="margin-top: 20px;">
-						<a href="#" >Enviar encomenda</a>
-					</div>
+					<div class="col-lg-3">
+						<a href="<c:url value='/'/>">
+		          			<span class="btn btn-default btn-sweetmanu">Quero mais!!</span>
+		          		</a>
+						<a href="<c:url value='/carrinho/enviarPedido'/>">
+		          			<span class="btn btn-default btn-sweetmanu">Enviar pedido</span>
+		          		</a>
+	          		</div>
 				</div>
+				<div class="row">
+					<div class="col-lg-12">
+					    <table class="table table-condensed">
+					      <tr>
+					        <th>Nome</th>
+					        <th>Tipo</th>
+					        <th>Valor</th>
+					        <th>Quant.</th>
+					      </tr>
 			
-				<div id="table" class="table-editable">
-				    <table class="table">
-				      <tr>
-				        <th>Nome</th>
-				        <th>Tipo</th>
-				        <th>Valor</th>
-				        <th>Quantidade</th>
-				        <th>Remover</th>
-				      </tr>
-		
-					  <c:forEach items='${carrinhoCompras.itens}' var='item'>
-					  	<tr>	
-							<td>${item.nome}</td>
-					        <td>${item.produtoTipo.nome}</td>
-					        <td>${item.valor}</td>
-					        <td>
-					        	<input type="text" width="3%" value="${carrinhoCompras.getQuantidade(item)}" />	
-					        </td>
-					        <td>
-				          		<a href="<c:url value='/carrinho/remover'/>/${item.id}">
-				          			<span class="table-remove glyphicon glyphicon-remove"></span>
-				          		</a>
-					        </td>
-				      	</tr>
-					  </c:forEach>
-					</table>
+						  <c:forEach items='${carrinhoCompras.itens}' var='item'>
+						  	<tr>	
+								<td>${item.nome}</td>
+						        <td>${item.produtoTipo.nome}</td>
+						        <td>${item.valor}</td>
+						        <td>
+						        	${carrinhoCompras.getQuantidade(item)}
+						        	<a href="<c:url value='/carrinho/adiciona'/>/${item.id}">
+					          			<span class="glyphicon glyphicon-plus glyphicon-sweet"></span>
+					          		</a>
+					          		<a href="<c:url value='/carrinho/remover'/>/${item.id}">
+					          			<span class="table-remove glyphicon glyphicon-minus glyphicon-sweet"></span>
+					          		</a>
+						        </td>
+					      	</tr>
+						  </c:forEach>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>

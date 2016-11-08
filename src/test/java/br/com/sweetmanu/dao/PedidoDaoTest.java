@@ -1,13 +1,13 @@
 package br.com.sweetmanu.dao;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.dbunit.dataset.CompositeDataSet;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -137,7 +137,7 @@ public class PedidoDaoTest extends EntityDaoImplTest {
 		Pessoa pessoa = new Pessoa();
 		pessoa.setNome("Maria T. Da Silva");
 		pessoa.setCpfCnpj("22255566665");
-		pessoa.setDtNascimento(new LocalDate());
+		pessoa.setDtNascimento(LocalDate.now());
 
 		Usuario user = new Usuario();
 		user.setEmail("maria.tereza@gmail.com");

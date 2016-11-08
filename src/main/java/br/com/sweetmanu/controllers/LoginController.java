@@ -2,10 +2,10 @@ package br.com.sweetmanu.controllers;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.sweetmanu.models.Usuario;
 
@@ -17,12 +17,9 @@ public class LoginController {
 		return "loginForm";
 	}
 
-	@RequestMapping(value = "/logar", method = RequestMethod.POST)
-	public ModelAndView login(@PathVariable("username") String usuario,@PathVariable("password") String senha) {
-
-		System.out.println(usuario);
-		System.out.println(senha);
-		
+	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
+	public ModelAndView loginFailure(RedirectAttributes model) {
+		model.addFlashAttribute("error", "true");
 		return new ModelAndView("redirect:login");
 	}
 

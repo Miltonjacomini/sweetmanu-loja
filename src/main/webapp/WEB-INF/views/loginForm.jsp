@@ -9,15 +9,19 @@
 	  <title>SweetManu</title>
 	  <!-- bootstrap -->
 	  <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>">
-	  <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-theme.min.css'/>">
 	  <link rel="stylesheet" href="<c:url value='/resources/css/login.css'/>">
-	  <link rel="icon" type="image/png" href="<c:url value='/resources/assets/img/small-logo-01.png'/>">
+	  <link rel="icon" type="image/png" href="<c:url value='/resources/img/favicon.png'/>">
 	</head>
 	<body>
-	  
+	  	<c:if test="${not empty error}">
+            <div class="alert alert-danger alert-dismissable">
+	            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+            </div>
+	  	</c:if>
 		<div class="container">
 		    <div class="card card-container">
-		        <img id="logo-img" class="logo-img" src="https://placeholdit.imgix.net/~text?txtsize=24&txt=150x150&w=150&h=150" />
+		        <img id="logo-img" class="logo-img" src="<c:url value='/resources/img/login.png'/>" />
 		        
 		        <form:form servletRelativeAction="/login" method="POST" class="form-signin">
 		            <input type="email" id="inputEmail" name="username" class="form-control" placeholder="email" required autofocus>
@@ -28,8 +32,8 @@
 		        <!-- /form -->
 		        
 		        <div class="signin-help">
-					<p>esqueceu sua senha? <a href="#">clique aqui</a></p>
-					<p>novo usuário? <a href="#">criar conta</a></p>
+					<p>esqueceu sua senha? <a href="<c:url value='/minhaConta/recuperarSenha'/>">clique aqui</a></p>
+					<p>novo usuário? <a href="<c:url value='/minhaConta/cadastro'/>">criar conta</a></p>
 				</div>
 		    </div>
 		</div>

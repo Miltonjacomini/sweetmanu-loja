@@ -2,17 +2,20 @@ package br.com.sweetmanu.models;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.StringUtils;
 
 @Entity
 @Table(name = "USUARIO")
@@ -27,9 +30,24 @@ public class Usuario implements UserDetails {
 	@Column(name = "SENHA")
 	private String senha;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	private List<Role> permissoes = new ArrayList<Role>();
+	@Transient
+	private String senhaConfirma;
 
+	@ElementCollection(targetClass = Role.class, fetch=FetchType.EAGER)
+	@Enumerated(EnumType.STRING)
+	@Column(name = "ROLE", nullable = false)
+	private Collection<Role> permissoes = new ArrayList<Role>();
+
+	public Usuario(){
+	}
+
+	public Usuario(Usuario usuario, Role role){
+		this.email = usuario.getEmail();
+		this.senha = usuario.getSenha();
+		this.senhaConfirma = usuario.getSenhaConfirma();
+		addRole(role);
+	}	
+	
 	public String getEmail() {
 		return email;
 	}
@@ -46,9 +64,8 @@ public class Usuario implements UserDetails {
 		this.senha = senha;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.permissoes;
+	public void addRole(Role role) {
+		this.permissoes.add(role);
 	}
 
 	@Override
@@ -59,6 +76,22 @@ public class Usuario implements UserDetails {
 	@Override
 	public String getUsername() {
 		return this.email;
+	}
+
+	public String getSenhaConfirma() {
+		return senhaConfirma;
+	}
+
+	public void setSenhaConfirma(String senhaConfirma) {
+		this.senhaConfirma = senhaConfirma;
+	}
+
+	public boolean isSenhaEquals() {
+		if (!StringUtils.isEmpty(senha) && !StringUtils.isEmpty(senhaConfirma)) {
+			if (senha.equals(senhaConfirma))
+				return true;
+		}
+		throw new RuntimeException("A senha não é compativel ou está vazia!");
 	}
 
 	@Override
@@ -104,5 +137,10 @@ public class Usuario implements UserDetails {
 		} else if (!email.equals(other.email))
 			return false;
 		return true;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.permissoes;
 	}
 }

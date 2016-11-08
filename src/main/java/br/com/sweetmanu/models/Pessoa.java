@@ -1,5 +1,8 @@
 package br.com.sweetmanu.models;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -13,10 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -35,12 +36,11 @@ public class Pessoa {
 	@Column(name = "CPF_CNPJ", nullable = false)
 	private String cpfCnpj;
 
-	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name = "DT_NASC", nullable = false)
 	private LocalDate dtNascimento;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.DETACH, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "email", nullable = false)
 	private Usuario usuario;
 
@@ -89,6 +89,11 @@ public class Pessoa {
 
 	public LocalDate getDtNascimento() {
 		return dtNascimento;
+	}
+	
+	public String getDtNascimentoFormatada() {
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return dtNascimento.format(formato);
 	}
 
 	public void setDtNascimento(LocalDate dtNascimento) {

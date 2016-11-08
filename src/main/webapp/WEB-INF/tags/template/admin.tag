@@ -6,25 +6,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>SweetManu</title>
-
-  <!-- bootstrap -->
-  <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>">
-  <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-theme.min.css'/>">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="icon" type="image/png" href="<c:url value='/resources/assets/img/small-logo-01.png'/>">
-  <!-- style -->
-   <link rel="stylesheet" href="<c:url value='/resources/css/index.css'/>">
-   <link rel="stylesheet" href="<c:url value='/resources/css/forms.css'/>">
-   <jsp:invoke fragment="extraStyles"/>
+	<meta charset="UTF-8">
+	<title>SweetManu</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="SweetManu - Doces Gourmet, Salgados e Afins">
+	<meta name="author" content="Milton Jacomini Neto">
+    
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-theme.min.css'/>">
+	<link rel="icon" type="image/png" href="<c:url value='/resources/img/favicon.png'/>">
+	<!-- style -->
+	<link rel="stylesheet" href="<c:url value='/resources/css/index.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/forms.css'/>">
+	<jsp:invoke fragment="extraStyles"/>
 </head>
 
 <body>
-  
   <!-- INICIO NAV (alterar pra include)-->
-
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -41,9 +40,9 @@
       <div class="collapse navbar-collapse" id="menu">
         <ul class="nav navbar-nav">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
-            	aria-haspopup="true" aria-expanded="false">
-            	Menu <span class="caret"></span>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            	Menu 
+            	<span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
 	        	<li>
@@ -79,6 +78,11 @@
               		</a>
               	</li>
 			  	<li role="separator" class="divider"></li>
+              	<li>
+              		<a href="<c:url value='/encomenda'/>"><span class="glyphicon glyphicon-menu-hamburger"></span>
+              			Lista encomendas
+              		</a>
+              	</li>
             </ul>
           </li>
             <security:authorize access="hasRole('ROLE_ADMIN')">
@@ -104,7 +108,7 @@
   <!-- FINAL NAV -->
 	<jsp:doBody />
 
-<script src="<c:url value='/resources/js/jquery-2.1.4.min.js'/>"></script>
+<script src="<c:url value='/resources/js/jquery.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 <jsp:invoke fragment="extraScripts"/>
 

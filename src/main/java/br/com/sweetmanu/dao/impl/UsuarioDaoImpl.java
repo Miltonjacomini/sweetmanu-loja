@@ -9,10 +9,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import br.com.sweetmanu.dao.UsuarioDao;
 import br.com.sweetmanu.models.Usuario;
 
 @Repository("usuarioDao")
-public class UsuarioDaoImpl implements UserDetailsService {
+public class UsuarioDaoImpl implements UserDetailsService, UsuarioDao {
 
 	@PersistenceContext
 	private EntityManager manager;
@@ -27,6 +28,11 @@ public class UsuarioDaoImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("Usuário '" + email + "', não encontrado!");
 
 		return usuarios.get(0);
+	}
+
+	@Override
+	public void salvarUsuario(Usuario usuario) {
+		manager.persist(usuario);
 	}
 
 }

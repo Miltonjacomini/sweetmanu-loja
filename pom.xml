@@ -13,7 +13,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 
-		<springframework.version>4.1.0.RELEASE</springframework.version>
+		<springframework.version>4.1.6.RELEASE</springframework.version>
 		<springsecurity.version>4.0.1.RELEASE</springsecurity.version>
 		<hibernate.version>4.3.0.Final</hibernate.version>
 		<postgres.version>9.4-1201-jdbc41</postgres.version>
@@ -22,6 +22,7 @@
 		<h2.version>1.4.187</h2.version>
 		<dbunit.version>2.2</dbunit.version>
 		<joda-time.version>2.9.4</joda-time.version>
+		<jackson.version>2.7.3</jackson.version>
 	</properties>
 
 	<dependencyManagement />
@@ -40,7 +41,17 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -152,9 +163,28 @@
 
 		<!-- AWS -->
 		<dependency>
-			<groupId>com.amazonaws</groupId>
-			<artifactId>aws-java-sdk</artifactId>
-			<version>1.10.12</version>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-s3</artifactId>
+		    <version>1.10.69</version>
+		</dependency>
+		
+		<!-- JavaMail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+
+		<!-- Jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>${jackson.version}</version>
 		</dependency>
 
 		<!-- Dependencias para testes -->
