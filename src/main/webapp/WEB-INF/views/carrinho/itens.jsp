@@ -7,8 +7,11 @@
 	<div id="wrapper-container">
 			<div class="container object">
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-10">
 						<h2 class="page-header">Carrinho de compras</h2>
+					</div>
+					<div class="col-lg-2" style="margin-top: 20px;">
+						<a href="#" >Enviar encomenda</a>
 					</div>
 				</div>
 			
@@ -27,7 +30,9 @@
 							<td>${item.nome}</td>
 					        <td>${item.produtoTipo.nome}</td>
 					        <td>${item.valor}</td>
-					        <td>${carrinhoCompras.getQuantidade(item)}</td>
+					        <td>
+					        	<input type="text" width="3%" value="${carrinhoCompras.getQuantidade(item)}" />	
+					        </td>
 					        <td>
 				          		<a href="<c:url value='/carrinho/remover'/>/${item.id}">
 				          			<span class="table-remove glyphicon glyphicon-remove"></span>
