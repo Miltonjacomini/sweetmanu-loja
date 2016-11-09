@@ -1,7 +1,13 @@
 package br.com.sweetmanu.infra;
 
+import javax.mail.BodyPart;
+import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -24,15 +30,16 @@ public class EmailSender {
 		try {
 
 			MimeMessage message = sender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message);
-			helper.setTo(emailDestino);
-			message.setContent(getCorpoEmailHTML(nomeCliente, senhaCliente), "text/html");
+			Multipart multipart = new MimeMultipart("alternative");
+			BodyPart part = new MimeBodyPart();
+			part.setContent(getCorpoEmailHTML(nomeCliente, senhaCliente), "text/html");
+			
+			multipart.addBodyPart(part);
+			message.setFrom(new InternetAddress("jacominimilton@gmail.com"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailDestino));
 			message.setSubject("[SweetManu - Bem vindo]");
-			/*
-			 * Para mandar com Anexo FileSystemResource res = new
-			 * FileSystemResource(new File("/caminhoDoArquivo.jpg"));
-			 * helper.addInline("arquivo", res);
-			 */
+			message.setContent(multipart);
+			
 			sender.send(message);
 			return true;
 
@@ -41,6 +48,29 @@ public class EmailSender {
 			return false;
 		}
 	}
+	
+/*	public boolean emailCadastroUsuario(String emailDestino, String nomeCliente, String senhaCliente) {
+
+		try {
+
+			MimeMessage message = sender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message);
+			helper.setTo(emailDestino);
+			message.setContent(getCorpoEmailHTML(nomeCliente, senhaCliente), "text/html");
+			message.setSubject("[SweetManu - Bem vindo]");
+			
+			 * Para mandar com Anexo FileSystemResource res = new
+			 * FileSystemResource(new File("/caminhoDoArquivo.jpg"));
+			 * helper.addInline("arquivo", res);
+			 
+			sender.send(message);
+			return true;
+
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}*/
 
 	private String getCorpoEmailHTML(String nomeCliente, String senhaCliente) {
 		StringBuilder texto = new StringBuilder();
