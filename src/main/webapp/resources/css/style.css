@@ -60,10 +60,14 @@
 	max-width: 320px;
 	max-height: 150px;
 }
+.div-img {
+	max-width: 320px;
+	max-height: 150px;
+	overflow: hidden;
+}
 .img-produto {
 	width: 320px;
 	height: auto;
-	overflow: hidden;
 }
 
 .carousel-holder {
@@ -86,7 +90,6 @@
 .caption h4 {
 	white-space: nowrap;
 	font-weight: bold;
-	color: #f6546a;
 }
 
 .thumbnail img {
