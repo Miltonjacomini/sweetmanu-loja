@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.sweetmanu.dao.ProdutoDao;
 import br.com.sweetmanu.dao.ProdutoTipoDao;
 import br.com.sweetmanu.models.Produto;
+import br.com.sweetmanu.service.AwsS3Service;
 import br.com.sweetmanu.validation.PaginatedListValidation;
 import br.com.sweetmanu.validation.ProdutoValidation;
 
@@ -28,8 +29,8 @@ public class ProdutoController {
 
 	@Autowired
 	private ProdutoDao productDao;
-	/*@Autowired
-	private AwsS3Service service;*/
+	@Autowired
+	private AwsS3Service service;
 	@Autowired
 	private ProdutoTipoDao produtoTipoDao;
 
@@ -60,10 +61,10 @@ public class ProdutoController {
 		if (bindingResult.hasErrors()) {
 			return form(produto);
 		}
-		/*String nomeFoto = produto.getNome()+foto.getOriginalFilename().substring(foto.getOriginalFilename().indexOf("."),
+		String nomeFoto = produto.getNome()+foto.getOriginalFilename().substring(foto.getOriginalFilename().indexOf("."),
 				foto.getOriginalFilename().length()).replaceAll(" ", "");
 		service.uploadFile(foto, nomeFoto);
-		produto.setPathFoto(nomeFoto);*/
+		produto.setPathFoto(nomeFoto);
 		productDao.salvar(produto);
 
 		return new ModelAndView("redirect:/produto");
@@ -84,7 +85,6 @@ public class ProdutoController {
 		return modelAndView;
 	}
 
-	// just because get is easier here. Be my guest if you want to change.
 	@RequestMapping(method = RequestMethod.GET, value = "/remover/{id}")
 	public String remover(@PathVariable("id") Integer id) {
 		productDao.remover(id);
