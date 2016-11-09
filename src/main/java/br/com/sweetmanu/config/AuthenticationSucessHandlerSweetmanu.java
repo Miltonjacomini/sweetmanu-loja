@@ -23,9 +23,9 @@ public class AuthenticationSucessHandlerSweetmanu implements AuthenticationSucce
 		if (authentication.getPrincipal() instanceof Usuario) {
 			final Usuario user = (Usuario) authentication.getPrincipal();
 			if (user.getAuthorities().contains(Role.ROLE_ADMIN))
-				response.sendRedirect("/sweetmanu/indexAdmin");
+				response.sendRedirect(request.getContextPath()+"/indexAdmin");
 			else 
-				response.sendRedirect("/sweetmanu/minhaConta");
+				response.sendRedirect(request.getContextPath()+"/minhaConta");
 		} 
 
 	}
