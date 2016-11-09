@@ -15,9 +15,9 @@
 				var tamanho = $("#cpfCnpj").val().length;
 				
 				if(tamanho < 11){
-					$('#cpfCnpj').mask('000.000.000-00', {reverse: true});
+					$('#cpfCnpj').mask('999.999.999-99', {reverse: true});
 				}else{
-					$('#cpfCnpj').mask('00.000.000/0000-00', {reverse: true});
+					$('#cpfCnpj').mask('99.999.999/9999-99', {reverse: true});
 				}
 			})
 		</script>
