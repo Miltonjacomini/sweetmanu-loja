@@ -17,6 +17,7 @@
 							<label for="nome">Digite seu e-mail cadastrado</label>
                         	<input type="text" name="email" class="form-control" placeholder="ex: contato@sweetmanu.com.br" required autofocus>
                         </div>
+                        <input class="btn btn-default btn-sweetmanu" value="Enviar" type="submit">
 					</div>
 				</form:form>
 			</div>
