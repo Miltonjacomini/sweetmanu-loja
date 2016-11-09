@@ -11,7 +11,6 @@ import javax.mail.internet.MimeMultipart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.util.StringUtils;
@@ -25,6 +24,31 @@ public class EmailSender {
 	@Autowired
 	private JavaMailSenderImpl sender;
 
+	/*	Enviando Via JavaMail Local
+  	public boolean emailCadastroUsuario(String emailDestino, String nomeCliente, String senhaCliente) {
+
+		try {
+
+			MimeMessage message = sender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message);
+			helper.setTo(emailDestino);
+			message.setContent(getCorpoEmailHTML(nomeCliente, senhaCliente), "text/html");
+			message.setSubject("[SweetManu - Bem vindo]");
+			
+			 * Para mandar com Anexo FileSystemResource res = new
+			 * FileSystemResource(new File("/caminhoDoArquivo.jpg"));
+			 * helper.addInline("arquivo", res);
+			 
+			sender.send(message);
+			return true;
+
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}*/
+	
+	/* HEROKU só envia e-mails se estiver com algum Add-on , no caso usei o SendGrid  */
 	public boolean emailCadastroUsuario(String emailDestino, String nomeCliente, String senhaCliente) {
 
 		try {
@@ -48,29 +72,6 @@ public class EmailSender {
 			return false;
 		}
 	}
-	
-/*	public boolean emailCadastroUsuario(String emailDestino, String nomeCliente, String senhaCliente) {
-
-		try {
-
-			MimeMessage message = sender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message);
-			helper.setTo(emailDestino);
-			message.setContent(getCorpoEmailHTML(nomeCliente, senhaCliente), "text/html");
-			message.setSubject("[SweetManu - Bem vindo]");
-			
-			 * Para mandar com Anexo FileSystemResource res = new
-			 * FileSystemResource(new File("/caminhoDoArquivo.jpg"));
-			 * helper.addInline("arquivo", res);
-			 
-			sender.send(message);
-			return true;
-
-		} catch (MessagingException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}*/
 
 	private String getCorpoEmailHTML(String nomeCliente, String senhaCliente) {
 		StringBuilder texto = new StringBuilder();
@@ -98,15 +99,16 @@ public class EmailSender {
 		try {
 
 			MimeMessage message = sender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message);
-			helper.setTo(usuario.getEmail());
-			message.setContent(getCorpoEmailRecuperarHTML(usuario), "text/html");
+			Multipart multipart = new MimeMultipart("alternative");
+			BodyPart part = new MimeBodyPart();
+			part.setContent(getCorpoEmailRecuperarHTML(usuario), "text/html");
+			
+			multipart.addBodyPart(part);
+			message.setFrom(new InternetAddress("jacominimilton@gmail.com"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(usuario.getEmail()));
 			message.setSubject("[SweetManu - Recuperação de senha]");
-			/*
-			 * Para mandar com Anexo FileSystemResource res = new
-			 * FileSystemResource(new File("/caminhoDoArquivo.jpg"));
-			 * helper.addInline("arquivo", res);
-			 */
+			message.setContent(multipart);
+			
 			sender.send(message);
 			return true;
 
@@ -136,16 +138,16 @@ public class EmailSender {
 		try {
 
 			MimeMessage message = sender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message);
-			// helper.setTo("contato@sweetmanu.com.br");
-			helper.setTo("miltonjacomini@gmail.com");
-			message.setContent(getEmailPedidoRealizado(pedido), "text/html");
+			Multipart multipart = new MimeMultipart("alternative");
+			BodyPart part = new MimeBodyPart();
+			part.setContent(getEmailPedidoRealizado(pedido), "text/html");
+			
+			multipart.addBodyPart(part);
+			message.setFrom(new InternetAddress("jacominimilton@gmail.com"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress("miltonjacomini@gmail.com"));
 			message.setSubject("[SweetManu - Novo pedido realizado]");
-			/*
-			 * Para mandar com Anexo FileSystemResource res = new
-			 * FileSystemResource(new File("/caminhoDoArquivo.jpg"));
-			 * helper.addInline("arquivo", res);
-			 */
+			message.setContent(multipart);
+			
 			sender.send(message);
 			return true;
 
@@ -160,7 +162,7 @@ public class EmailSender {
 		texto.append("<html><body><h2>Boas novas, você tem um novo pedido!</h2><br/>");
 		texto.append("<p>Lembre-se que o prazo para confirmação dele é de 3 dias, aqui vai");
 		texto.append("algumas informações sobre ele :</p>");
-		texto.append("<p>Quem solicitou: </p><h3>" + pedido.getPessoa().getNome() + "</h3><br/>");
+		texto.append("<p>Quem solicitou: </p><h3>" + pedido.getPessoa().getNome() + "</h3>");
 		texto.append("<p>E-mail:</p> " + pedido.getPessoa().getUsuario().getEmail() + "<br/>");
 		texto.append("<p>Telefone:</p> " + !StringUtils.isNullOrEmpty(pedido.getPessoa().getContato().getTelefone()) + "<br/>");
 		texto.append("<p>Celular:</p> " + !StringUtils.isNullOrEmpty(pedido.getPessoa().getContato().getCelular()) + "<br/>");
@@ -174,18 +176,18 @@ public class EmailSender {
 
 	public void emailPedidoCancelado(Pedido pedido) {
 		try {
-
+			
 			MimeMessage message = sender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message);
-			// helper.setTo("contato@sweetmanu.com.br");
-			helper.setTo("miltonjacomini@gmail.com");
-			message.setContent(getEmailPedidoCancelado(pedido), "text/html");
+			Multipart multipart = new MimeMultipart("alternative");
+			BodyPart part = new MimeBodyPart();
+			part.setContent(getEmailPedidoCancelado(pedido), "text/html");
+			
+			multipart.addBodyPart(part);
+			message.setFrom(new InternetAddress("jacominimilton@gmail.com"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress("miltonjacomini@gmail.com"));
 			message.setSubject("[SweetManu - Pedido Cancelado]");
-			/*
-			 * Para mandar com Anexo FileSystemResource res = new
-			 * FileSystemResource(new File("/caminhoDoArquivo.jpg"));
-			 * helper.addInline("arquivo", res);
-			 */
+			message.setContent(multipart);
+
 			sender.send(message);
 
 		} catch (MessagingException e) {

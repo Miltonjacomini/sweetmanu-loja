@@ -14,14 +14,14 @@
 	                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
 	                    </ol>
 	                    <div class="carousel-inner">
-	                        <div class="item active">
-	                            <img class="slide-image" src="<c:url value='/resources/img/sweetbrig.jpg'/>" width="800" height="300" alt="">
+	                        <div class="item active carousel-img">
+	                            <img class="slide-image" src="<c:url value='/resources/img/sweetbrig.jpg'/>" alt="">
 	                        </div>
-	                        <div class="item">
-	                            <img class="slide-image" src="<c:url value='/resources/img/sweetbrig.jpg'/>" width="800" height="300"  alt="">
+	                        <div class="item carousel-img">
+	                            <img class="slide-image" src="<c:url value='/resources/img/sweetbrig.jpg'/>" alt="">
 	                        </div>
-	                        <div class="item">
-	                            <img class="slide-image" src="<c:url value='/resources/img/sweetbrig.jpg'/>" width="800" height="300"  alt="">
+	                        <div class="item carousel-img">
+	                            <img class="slide-image" src="<c:url value='/resources/img/sweetbrig.jpg'/>" alt="">
 	                        </div>
 	                    </div>
 	                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -39,7 +39,9 @@
 					<c:forEach items="${produtos}" var="produto">
 	                   <div class="col-sm-4 col-lg-4 col-md-4">
 	                       <div class="thumbnail">
-	                           <img src="https://s3-sa-east-1.amazonaws.com/sweetmanu/${produto.pathFoto}" width="150" height="300" alt="${produto.nome}">
+	                       	   <div class="img-produto">
+	                           		<img class="img-responsive" src="https://s3-sa-east-1.amazonaws.com/sweetmanu/${produto.pathFoto}" alt="${produto.nome}">
+	                           </div>
 	                           <div class="caption">
 	                               <h4 class="pull-right">R$ ${produto.valor}</h4>
 	                               <a href="<c:url value='/produto/detalhe'/>/${produto.id}">${produto.nome}</a>

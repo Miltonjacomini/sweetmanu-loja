@@ -47,8 +47,17 @@
 	color: #f6546a;
 }
 
+.carousel-img {
+	width: 800px;
+	height: 300px;
+}
 .slide-image {
 	width: 100%;
+	height: auto;
+}
+.img-produto {
+	width: 300px;
+	height: 150px;
 }
 
 .carousel-holder {
