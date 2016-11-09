@@ -32,6 +32,11 @@ public class MinhaContaController {
 		modelAndView.addObject("pedidos", minhaContaService.meusPedidos(pessoa.getId()));
 		return modelAndView;
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/recuperarSenha")
+	public ModelAndView recuperarSenha() {
+		return new ModelAndView("minhaConta/recuperarSenha");
+	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/recuperarSenha/{email}")
 	public ModelAndView recuperarSenha(@PathVariable String email) {
