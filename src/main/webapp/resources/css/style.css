@@ -48,20 +48,15 @@
 }
 
 .carousel-img {
-	width: 800px;
-	height: 350px;
+	width: 100%;
+	max-height: 350px;
+	overflow:hidden;
 }
 .slide-image {
 	width: 100%;
 }
-.img-produto-works {
-	width: auto;
-	height: auto;
-	max-width: 320px;
-	max-height: 150px;
-}
+
 .div-img {
-	max-width: 320px;
 	max-height: 150px;
 	overflow: hidden;
 }
