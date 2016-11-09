@@ -93,10 +93,10 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	public JavaMailSenderImpl javaMailSenderImpl(){
 		
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-		mailSender.setHost("smtp.gmail.com");
+		mailSender.setHost("smtp.sendgrid.net");
 		mailSender.setPort(587);
-		mailSender.setUsername(System.getenv("EMAIL"));
-		mailSender.setPassword(System.getenv("EMAIL_PW"));
+		mailSender.setUsername(System.getenv("SENDGRID_USERNAME"));
+		mailSender.setPassword(System.getenv("SENDGRID_PASSWORD"));
 		
 		Properties prop = mailSender.getJavaMailProperties();
 		prop.put("mail.transport.protocol", "smtp");
