@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +27,6 @@ public class PessoaDaoImpl implements PessoaDao {
 
 	public void salvar(Pessoa pessoa) {
 		pessoa.getUsuario().addRole(Role.ROLE_CLIENTE);
-		String senha = BCrypt.hashpw(pessoa.getUsuario().getSenha(), BCrypt.gensalt());
-		pessoa.getUsuario().setSenha(senha);
 		manager.persist(pessoa);
 	}
 
