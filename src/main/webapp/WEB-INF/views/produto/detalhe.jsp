@@ -17,7 +17,7 @@
 				<div class="row">
 					<div class="col-md-4">
 						<img class="img-responsive"
-							src="https://s3-sa-east-1.amazonaws.com/sweetmanu-uploads/${produto.pathFoto}"
+							src="https://s3-sa-east-1.amazonaws.com/sweetmanu/${produto.pathFoto}"
 							alt="${produto.nome}">
 					</div>
 		

@@ -39,7 +39,9 @@
 					<c:forEach items="${produtos}" var="produto">
 	                   <div class="col-sm-4 col-lg-4 col-md-4">
 	                       <div class="thumbnail">
-                           	   <img class="img-produto" src="https://s3-sa-east-1.amazonaws.com/sweetmanu/${produto.pathFoto}" alt="${produto.nome}">
+                           	   <div class="div-img-produto">
+                           	   		<img class="img-produto" src="https://s3-sa-east-1.amazonaws.com/sweetmanu/${produto.pathFoto}" alt="${produto.nome}">
+                           	   </div>
 	                           <div class="caption">
 	                               <h4 class="pull-right">R$ ${produto.valor}</h4>
 	                               <a href="<c:url value='/produto/detalhe'/>/${produto.id}">${produto.nome}</a>

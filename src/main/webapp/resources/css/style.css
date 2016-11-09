@@ -55,6 +55,10 @@
 	width: 100%;
 }
 .img-produto {
+	width: 100%;
+	height: auto;
+}
+.div-img-produto {
 	width: 320px;
 	height: 150px;
 }
@@ -68,22 +72,19 @@
 }
 
 .caption {
-	height: 130px;
+	height: 80px;
 	overflow: hidden;
+	background-color: #b9b9b9;
 }
 
 .caption h4 {
 	white-space: nowrap;
+	font-weight: bold;
+	color: #f6546a;
 }
 
 .thumbnail img {
 	width: 100%;
-}
-
-.ratings {
-	padding-right: 10px;
-	padding-left: 10px;
-	color: #d17581;
 }
 
 .thumbnail {
