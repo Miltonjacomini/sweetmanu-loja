@@ -54,11 +54,16 @@
 .slide-image {
 	width: 100%;
 }
-.img-produto {
+.img-produto-works {
 	width: auto;
 	height: auto;
 	max-width: 320px;
 	max-height: 150px;
+}
+.img-produto {
+	width: 320px;
+	height: auto;
+	overflow: hidden;
 }
 
 .carousel-holder {
@@ -75,6 +80,9 @@
 	background-color: #e9e9e9;
 }
 
+.caption a {
+	color: #f6546a;
+}
 .caption h4 {
 	white-space: nowrap;
 	font-weight: bold;
