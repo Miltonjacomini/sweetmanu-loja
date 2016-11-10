@@ -101,7 +101,7 @@ public class EmailSender {
 			MimeMessage message = sender.createMimeMessage();
 			Multipart multipart = new MimeMultipart("alternative");
 			BodyPart part = new MimeBodyPart();
-			part.setContent(getCorpoEmailRecuperarHTML(usuario), "text/html");
+			part.setContent(getCorpoEmailRecuperarHTML(usuario.getSenha()), "text/html");
 			
 			multipart.addBodyPart(part);
 			message.setFrom(new InternetAddress("jacominimilton@gmail.com"));
@@ -118,12 +118,12 @@ public class EmailSender {
 		}
 	}
 
-	private Object getCorpoEmailRecuperarHTML(Usuario usuario) {
+	private Object getCorpoEmailRecuperarHTML(String senhaReset) {
 		StringBuilder texto = new StringBuilder();
 		texto.append("<html><body><h2>Olá, tudo bom??</h2><br/>");
 		texto.append("<p>Você esqueceu sua senha mas nós te ajudamos, fica sussa... :)</p><br/>");
 		texto.append("<p>a senha que você cadastrou é essa aqui:</p>");
-		texto.append("<h3></br> " + usuario.getSenha() + "</h3><br/>");
+		texto.append("<h3></br> " + senhaReset + "</h3><br/>");
 		texto.append("<p>Bom é isso ai, se você ainda tiver dificuldades para se logar é só me mandar um e-mail!!</p>");
 		texto.append("<p>Te espero lá, Boas compras!!</p>");
 		texto.append("<p>Beijãooo!!</p></body></html>");

@@ -1,6 +1,13 @@
 /*!
  * 
  */
+ .titulo-pagina {
+ 	margin-top:-5px;
+ 	margin-bottom:15px;
+ }
+.login-messages {
+	margin-top: 20px;
+}
 #form-cadastro {
 	margin-top: 10px;
 }
@@ -57,7 +64,7 @@
 }
 
 .div-img {
-	max-height: 150px;
+	max-height: 180px;
 	overflow: hidden;
 }
 .img-produto {
@@ -74,13 +81,16 @@
 }
 
 .caption {
-	height: 80px;
+	height: 100px;
 	overflow: hidden;
-	background-color: #e9e9e9;
+	background-color: #f4f4f4;
+	border:none;
 }
 
 .caption a {
 	color: #f6546a;
+	font-size:18px;
+	font-weight: bold;
 }
 .caption h4 {
 	white-space: nowrap;
@@ -93,6 +103,7 @@
 
 .thumbnail {
 	padding: 0;
+	border: none;
 }
 
 .thumbnail .caption-full {
@@ -129,4 +140,35 @@
 
 footer {
 	margin: 50px 0;
+}
+
+.vertical-center {
+
+  /* Make it a flex container */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; 
+  
+  /* Align the bootstrap's container vertically */
+    -webkit-box-align : center;
+  -webkit-align-items : center;
+       -moz-box-align : center;
+       -ms-flex-align : center;
+          align-items : center;
+  
+  /* In legacy web browsers such as Firefox 9
+     we need to specify the width of the flex container */
+  width: 100%;
+  
+  /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
+     hence the bootstrap's container won't be aligned to the center anymore.
+  
+     Therefore, we should use the following declarations to get it centered again */
+         -webkit-box-pack : center;
+            -moz-box-pack : center;
+            -ms-flex-pack : center;
+  -webkit-justify-content : center;
+          justify-content : center;
 }

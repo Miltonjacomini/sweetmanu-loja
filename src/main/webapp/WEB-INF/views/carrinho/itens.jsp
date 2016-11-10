@@ -7,7 +7,7 @@
 	<div id="wrapper-container">
 			<div class="container object">
 				<div class="row">
-					<div class="col-lg-9">
+					<div class="col-lg-9 titulo-pagina">
 						<h2>Carrinho de compras</h2>
 					</div>
 					<div class="col-lg-3">

@@ -44,9 +44,7 @@
                        	   	   </div>
 	                           <div class="caption">
 	                               <h4 class="pull-right">R$ ${produto.valor}</h4>
-	                               <h4>
-	                                   <a href="<c:url value='/produto/detalhe'/>/${produto.id}">${produto.nome}</a>
-	                               </h4>
+                                   <a href="<c:url value='/produto/detalhe'/>/${produto.id}">${produto.nome}</a>
 	                               <p>${produto.descricao}</p>
 	                           </div>
 	                       </div>

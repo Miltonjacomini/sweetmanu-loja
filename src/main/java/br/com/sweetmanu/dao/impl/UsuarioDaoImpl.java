@@ -34,9 +34,13 @@ public class UsuarioDaoImpl implements UserDetailsService, UsuarioDao {
 
 	@Override
 	public void salvarUsuario(Usuario usuario) {
-		usuario.addRole(Role.ROLE_CLIENTE);
+		
+		if(usuario.getAuthorities().size() == 0)
+			usuario.addRole(Role.ROLE_CLIENTE);
+		
 		String senha = BCrypt.hashpw(usuario.getSenha(), BCrypt.gensalt());
 		usuario.setSenha(senha);
+
 		manager.persist(usuario);
 	}
 

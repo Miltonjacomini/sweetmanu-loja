@@ -4,22 +4,21 @@
 <template:public>
 	<jsp:body>
 		<!-- PORTFOLIO -->
-		<div class="row">
-			<div class="col-lg-6 col-lg-offset-4">
+		<div class="row"> 
+			<div class="col-lg-12 text-center titulo-pagina">
 				<h2>recuperação de senha</h2>
 			</div>
 		</div>
 		<div class="row">
-            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3 form-cadastro">
-				<form:form id="formCadastro" servletRelativeAction="/minhaConta/recuperarSenha" method="POST">
-					<div class="col-lg-6">
-						<div class="form-group">
-							<label for="nome">Digite seu e-mail cadastrado</label>
-                        	<input type="text" name="email" class="form-control" placeholder="ex: contato@sweetmanu.com.br" required autofocus>
-                        </div>
-                        <input class="btn btn-default btn-sweetmanu" value="Enviar" type="submit">
+            <div class="col-lg-8 col-lg-offset-3">
+            	<form action="${pageContext.request.contextPath}/minhaConta/enviarSenha" method="POST">
+            		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<div class="col-lg-8">
+						<label for="email">Digite seu e-mail cadastrado</label>
+						<input name="email" type="text" placeholder="ex: contato@sweetmanu.com.br" required autofocus style="width:250px;"/>
+                		<input class="btn btn-default btn-sweetmanu" value="Enviar" type="submit">
 					</div>
-				</form:form>
+				</form>
 			</div>
 		</div>
 	</jsp:body>

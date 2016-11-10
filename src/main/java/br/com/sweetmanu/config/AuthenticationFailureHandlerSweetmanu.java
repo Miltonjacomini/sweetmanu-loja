@@ -13,10 +13,16 @@ public class AuthenticationFailureHandlerSweetmanu implements AuthenticationFail
 
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException exception) throws IOException, ServletException {
+			AuthenticationException ex) throws IOException, ServletException {
 		
-		response.sendRedirect(request.getContextPath()+"/loginfailed");
 		
+		if(ex.getMessage().contains("Bad credentials"))
+			request.setAttribute("messageError", "Usuário ou Senha inválidos, tente novamente.");
+		else
+			request.setAttribute("messageError", ex.getMessage());
+		
+		request.getRequestDispatcher("/WEB-INF/views/loginForm.jsp").forward(request, response);;
+		ex.printStackTrace();
 	}
 
 }

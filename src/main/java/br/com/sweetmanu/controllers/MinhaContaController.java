@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,14 +39,16 @@ public class MinhaContaController {
 		return new ModelAndView("minhaConta/recuperarSenha");
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/recuperarSenha/{email}")
-	public ModelAndView recuperarSenha(@PathVariable String email) {
+	@RequestMapping(method = RequestMethod.POST, value = "/enviarSenha")
+	public ModelAndView recuperarSenha(@ModelAttribute("email") String email, RedirectAttributes model) {
 		ModelAndView modelAndView = new ModelAndView("minhaConta/recuperarSenha");
-		if (minhaContaService.recuperarSenha(email))
-			modelAndView.addObject("messageSuccess", "Foi enviado um email pra você com sua senha! =)");
-		else
+		if (minhaContaService.recuperarSenha(email)){
+			model.addFlashAttribute("messageSuccess", "Foi enviado um email pra você com sua senha! =)");
+			modelAndView.setViewName("redirect:/login");
+		}else
 			modelAndView.addObject("messageError",
 					"Tivemos algum problema ao enviar seu e-mail, tente novamente mais tarde. :(");
+		
 		return modelAndView;
 	}
 

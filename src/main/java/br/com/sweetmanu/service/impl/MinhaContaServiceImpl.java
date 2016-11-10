@@ -11,6 +11,7 @@ import br.com.sweetmanu.dao.PedidoDao;
 import br.com.sweetmanu.dao.PessoaDao;
 import br.com.sweetmanu.dao.UsuarioDao;
 import br.com.sweetmanu.infra.EmailSender;
+import br.com.sweetmanu.infra.RandomString;
 import br.com.sweetmanu.models.Pedido;
 import br.com.sweetmanu.models.Pessoa;
 import br.com.sweetmanu.models.Role;
@@ -26,7 +27,7 @@ public class MinhaContaServiceImpl implements MinhaContaService {
 
 	@Autowired
 	private UsuarioDao usuarioDao;
-	
+
 	@Autowired
 	private PedidoDao pedidoDao;
 
@@ -49,11 +50,14 @@ public class MinhaContaServiceImpl implements MinhaContaService {
 	@Override
 	public boolean recuperarSenha(String email) {
 		Usuario usuario = usuarioDao.loadUserByUsername(email);
-		if(usuario != null){
+		if (usuario != null) {
+			String senhaReset = RandomString.generateString();
+			usuario.setSenha(senhaReset);
 			enviadorEmail.emailRecuperarSenha(usuario);
+			usuarioDao.salvarUsuario(usuario);
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -61,7 +65,7 @@ public class MinhaContaServiceImpl implements MinhaContaService {
 	public Pessoa dadosPessoais() {
 		Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Pessoa pessoa = pessoaDao.findByEmail(usuario.getEmail());
-		if(pessoa != null)
+		if (pessoa != null)
 			return pessoa;
 
 		throw new RuntimeException("Não localizamos um cadastro com seu e-mail!! :(");

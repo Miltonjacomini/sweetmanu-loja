@@ -13,12 +13,28 @@
 	  <link rel="icon" type="image/png" href="<c:url value='/resources/img/favicon.png'/>">
 	</head>
 	<body>
-	  	<c:if test="${not empty error}">
-            <div class="alert alert-danger alert-dismissable">
-	            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
-            </div>
-	  	</c:if>
+	
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="login-messages">
+						<c:if test="${messageSuccess != null}">
+				            <div class="alert alert-success alert-dismissable">
+					            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				                ${messageSuccess}
+				            </div>
+			            </c:if>
+					  	<c:if test="${messageError != null}">
+				         <div class="alert alert-danger alert-dismissable">
+					            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				             ${messageError}
+				         </div>
+				        </c:if>
+					</div>
+				</div>
+			</div>
+		</div>
+	
 		<div class="container">
 		    <div class="card card-container">
 		        <img id="logo-img" class="logo-img" src="<c:url value='/resources/img/login.png'/>" />
