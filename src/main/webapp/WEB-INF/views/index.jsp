@@ -15,13 +15,13 @@
 	                    </ol>
 	                    <div class="carousel-inner">
 	                        <div class="item active carousel-img">
-	                            <img class="slide-image" src="<c:url value='/resources/img/banner1.jpg'/>" alt="">
+	                            <img class="slide-image" src="<c:url value='https://s3-sa-east-1.amazonaws.com/sweetmanu/banner1.jpg'/>" alt="">
 	                        </div>
 	                        <div class="item carousel-img">
-	                            <img class="slide-image" src="<c:url value='/resources/img/banner2.jpg'/>" alt="">
+	                            <img class="slide-image" src="<c:url value='https://s3-sa-east-1.amazonaws.com/sweetmanu/banner2.jpg'/>" alt="">
 	                        </div>
 	                        <div class="item carousel-img">
-	                            <img class="slide-image" src="<c:url value='/resources/img/banner3.jpg'/>" alt="">
+	                            <img class="slide-image" src="<c:url value='https://s3-sa-east-1.amazonaws.com/sweetmanu/banner3.jpg'/>" alt="">
 	                        </div>
 	                    </div>
 	                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
