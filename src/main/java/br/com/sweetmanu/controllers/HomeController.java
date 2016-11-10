@@ -28,6 +28,11 @@ public class HomeController {
 		return "indexAdmin";
 	}
 	
+	@RequestMapping("/sobreNos")
+	public String sobreNos() {
+		return "sobreNos";
+	}
+	
 	@RequestMapping(value="/403", method=RequestMethod.GET)
 	public ModelAndView acessoNegado(Principal user) {
 		ModelAndView model = new ModelAndView("403");
