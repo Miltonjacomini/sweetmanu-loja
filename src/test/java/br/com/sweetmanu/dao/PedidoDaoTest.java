@@ -76,10 +76,10 @@ public class PedidoDaoTest extends EntityDaoImplTest {
 	@Test
 	public void confirmarPedido() {
 		Assert.assertEquals(pedidoDao.findByStatus(PedidoStatus.ENVIADO).size(), 3);
-		pedidoDao.confirmaPedido(pedidoDao.findById(1));
+		pedidoDao.confirmaPedido(1);
 		Assert.assertEquals(pedidoDao.findByStatus(PedidoStatus.CONFIRMADO).size(), 1);
 		Assert.assertEquals(pedidoDao.findByStatus(PedidoStatus.ENVIADO).size(), 2);
-		pedidoDao.confirmaPedido(pedidoDao.findById(1));
+		pedidoDao.confirmaPedido(1);
 		Assert.assertEquals(pedidoDao.findByStatus(PedidoStatus.CONFIRMADO).size(), 1);
 	}
 
@@ -87,10 +87,10 @@ public class PedidoDaoTest extends EntityDaoImplTest {
 	public void pedidoEmPreparo() {
 		Pedido pedidoEmPreparo = pedidoDao.findById(1);
 		Assert.assertEquals(pedidoDao.findByStatus(PedidoStatus.ENVIADO).size(), 3);
-		pedidoDao.pedidoEmPreparo(pedidoEmPreparo);
+		pedidoDao.pedidoEmPreparo(pedidoEmPreparo.getId());
 		Assert.assertEquals(pedidoDao.findByStatus(PedidoStatus.EM_PREPARO).size(), 0);
-		pedidoDao.confirmaPedido(pedidoEmPreparo);
-		pedidoDao.pedidoEmPreparo(pedidoEmPreparo);
+		pedidoDao.confirmaPedido(pedidoEmPreparo.getId());
+		pedidoDao.pedidoEmPreparo(pedidoEmPreparo.getId());
 		Assert.assertEquals(pedidoDao.findByStatus(PedidoStatus.ENVIADO).size(), 2);
 		Assert.assertEquals(pedidoDao.findByStatus(PedidoStatus.EM_PREPARO).size(), 1);
 		Assert.assertEquals(pedidoEmPreparo.getStatus(), PedidoStatus.EM_PREPARO);
@@ -99,23 +99,23 @@ public class PedidoDaoTest extends EntityDaoImplTest {
 	@Test
 	public void pedidoFinalizado() {
 		Pedido pedidoAFinalizar = pedidoDao.findById(1);
-		pedidoDao.confirmaPedido(pedidoAFinalizar);
-		pedidoDao.pedidoFinalizado(pedidoAFinalizar);
+		pedidoDao.confirmaPedido(pedidoAFinalizar.getId());
+		pedidoDao.pedidoFinalizado(pedidoAFinalizar.getId());
 		Assert.assertNotEquals(pedidoDao.findById(pedidoAFinalizar.getId()).getStatus(), PedidoStatus.FINALIZADO);
-		pedidoDao.pedidoEmPreparo(pedidoAFinalizar);
-		pedidoDao.pedidoFinalizado(pedidoAFinalizar);
+		pedidoDao.pedidoEmPreparo(pedidoAFinalizar.getId());
+		pedidoDao.pedidoFinalizado(pedidoAFinalizar.getId());
 		Assert.assertEquals(pedidoDao.findByStatus(PedidoStatus.FINALIZADO).size(), 1);
 	}
 
 	@Test
 	public void pedidoEntregue() {
 		Pedido pedidoEntregue = pedidoDao.findById(1);
-		pedidoDao.confirmaPedido(pedidoEntregue);
-		pedidoDao.pedidoEmPreparo(pedidoEntregue);
-		pedidoDao.pedidoEntregue(pedidoEntregue);
+		pedidoDao.confirmaPedido(pedidoEntregue.getId());
+		pedidoDao.pedidoEmPreparo(pedidoEntregue.getId());
+		pedidoDao.pedidoEntregue(pedidoEntregue.getId());
 		Assert.assertNotEquals(pedidoDao.findById(pedidoEntregue.getId()).getStatus(), PedidoStatus.ENTREGUE);
-		pedidoDao.pedidoFinalizado(pedidoEntregue);
-		pedidoDao.pedidoEntregue(pedidoEntregue);
+		pedidoDao.pedidoFinalizado(pedidoEntregue.getId());
+		pedidoDao.pedidoEntregue(pedidoEntregue.getId());
 		Assert.assertEquals(pedidoDao.findByStatus(PedidoStatus.ENTREGUE).size(), 1);
 		Assert.assertEquals(pedidoDao.findById(pedidoEntregue.getId()).getStatus(), PedidoStatus.ENTREGUE);
 	}

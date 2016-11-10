@@ -43,7 +43,7 @@
 }
 
 .logout {
-	font-size: 10px;
+	font-size: 14px;
 }
 
 .menu-text a {
@@ -62,9 +62,6 @@
 .slide-image {
 	width: 100%;
 	height: auto;
-	margin-left:auto;
-	margin-right:auto;
-	display:block;
 }
 
 .div-img {

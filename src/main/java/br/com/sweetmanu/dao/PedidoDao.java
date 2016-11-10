@@ -23,13 +23,13 @@ public interface PedidoDao {
 
 	public void enviarPedido(Pedido pedido);
 
-	public void confirmaPedido(Pedido pedido);
+	public boolean confirmaPedido(Integer pedidoId);
 
-	public void pedidoEntregue(Pedido pedido);
+	public boolean pedidoEntregue(Integer pedidoId);
 
-	public void pedidoEmPreparo(Pedido pedido);
+	public boolean pedidoEmPreparo(Integer pedidoId);
 
-	public void pedidoFinalizado(Pedido pedido);
+	public boolean pedidoFinalizado(Integer pedidoId);
 
 	public boolean cancelar(Pedido pedido);
 

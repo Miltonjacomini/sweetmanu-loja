@@ -18,7 +18,8 @@ public class PedidoDaoImpl implements PedidoDao {
 	private EntityManager manager;
 
 	public List<Pedido> all() {
-		return manager.createQuery("select distinct p from Pedido p JOIN FETCH p.produtos", Pedido.class).getResultList();
+		return manager.createQuery("select distinct p from Pedido p JOIN FETCH p.produtos", Pedido.class)
+				.getResultList();
 	}
 
 	public Pedido findById(Integer id) {
@@ -26,11 +27,11 @@ public class PedidoDaoImpl implements PedidoDao {
 	}
 
 	public List<Pedido> findByPessoa(Integer pessoaId) {
-		return manager.createQuery("select distinct p from Pedido p JOIN FETCH p.produtos where p.pessoa.id = :id and p.status != 'CANCELADO'", Pedido.class)
-					  .setParameter("id", pessoaId)
-					  .getResultList();
+		return manager.createQuery(
+				"select distinct p from Pedido p JOIN FETCH p.produtos where p.pessoa.id = :id and p.status != 'CANCELADO'",
+				Pedido.class).setParameter("id", pessoaId).getResultList();
 	}
-	
+
 	public List<Pedido> findByStatus(PedidoStatus status) {
 		return manager.createQuery("select p from Pedido p where p.status = :status", Pedido.class)
 				.setParameter("status", status).getResultList();
@@ -53,56 +54,60 @@ public class PedidoDaoImpl implements PedidoDao {
 		salvar(pedido);
 	}
 
-	public void confirmaPedido(Pedido pedido) {
-		if (pedido.getPessoa().getId() != null) {
-			Pedido pedidoAConfirmar = findById(pedido.getId());
+	public boolean confirmaPedido(Integer pedidoId) {
+		if (pedidoId != null) {
+			Pedido pedidoAConfirmar = findById(pedidoId);
 			if (pedidoAConfirmar != null && pedidoAConfirmar.getStatus().equals(PedidoStatus.ENVIADO)) {
 				pedidoAConfirmar.setStatus(PedidoStatus.CONFIRMADO);
 				salvar(pedidoAConfirmar);
-			} else {
-				System.out.println("Pedido não encontrado!");
-			}
+				return true;
+			} else
+				throw new RuntimeException("Pedido não encontrado ou status diferente de 'ENVIADO'!");
 		}
+		return false;
 	}
 
-	public void pedidoEntregue(Pedido pedido) {
+	public boolean pedidoEntregue(Integer pedidoId) {
 
-		if (pedido.getPessoa().getId() != null) {
-			Pedido pedidoEntregue = findById(pedido.getId());
+		if (pedidoId != null) {
+			Pedido pedidoEntregue = findById(pedidoId);
 			if (pedidoEntregue != null && pedidoEntregue.getStatus().equals(PedidoStatus.FINALIZADO)) {
 				pedidoEntregue.setStatus(PedidoStatus.ENTREGUE);
 				salvar(pedidoEntregue);
-			} else {
-				System.out.println("Pedido não encontrado!");
-			}
+				return true;
+			} else
+				throw new RuntimeException("Pedido não encontrado ou status diferente de 'FINALIZADO'!");
 		}
-
+		
+		return false;
 	}
 
-	public void pedidoEmPreparo(Pedido pedido) {
+	public boolean pedidoEmPreparo(Integer pedidoId) {
 
-		if (pedido.getPessoa().getId() != null) {
-			Pedido pedidoEntregue = findById(pedido.getId());
+		if (pedidoId != null) {
+			Pedido pedidoEntregue = findById(pedidoId);
 			if (pedidoEntregue != null && pedidoEntregue.getStatus().equals(PedidoStatus.CONFIRMADO)) {
 				pedidoEntregue.setStatus(PedidoStatus.EM_PREPARO);
 				salvar(pedidoEntregue);
-			} else {
-				System.out.println("Pedido não encontrado ou não está confirmado!");
-			}
+				return true;
+			} else
+				throw new RuntimeException("Pedido não encontrado ou status diferente de 'CONFIRMADO'!");
 		}
+		return false;
 	}
 
-	public void pedidoFinalizado(Pedido pedido) {
+	public boolean pedidoFinalizado(Integer pedidoId) {
 
-		if (pedido.getPessoa().getId() != null) {
-			Pedido pedidoFinalizado = findById(pedido.getId());
+		if (pedidoId != null) {
+			Pedido pedidoFinalizado = findById(pedidoId);
 			if (pedidoFinalizado != null && pedidoFinalizado.getStatus().equals(PedidoStatus.EM_PREPARO)) {
 				pedidoFinalizado.setStatus(PedidoStatus.FINALIZADO);
 				salvar(pedidoFinalizado);
-			} else {
-				System.out.println("Pedido não encontrado!");
-			}
+				return true;
+			} else
+				throw new RuntimeException("Pedido não encontrado ou status diferente de 'EM PREPARO'!");
 		}
+		return false;
 	}
 
 	@Override
@@ -111,5 +116,5 @@ public class PedidoDaoImpl implements PedidoDao {
 		salvar(pedido);
 		return true;
 	}
-	
+
 }

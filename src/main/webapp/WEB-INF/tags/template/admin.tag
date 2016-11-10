@@ -105,6 +105,41 @@
     </div>
   </nav>
 
+	<c:if test="${messageSuccess != null || message != null || messageWarning != null || messageError != null}">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel-messages">
+						<c:if test="${messageSuccess != null}">
+				            <div class="alert alert-success alert-dismissable">
+					            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				                ${messageSuccess}
+				            </div>
+			            </c:if>
+			            <c:if test="${message != null}">
+				            <div class="alert alert-info alert-dismissable">
+					            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				                ${message}
+				            </div>
+			            </c:if>
+			            <c:if test="${messageWarning != null}">
+				            <div class="alert alert-warning alert-dismissable">
+					            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				                ${messageWarning}
+				            </div>
+			            </c:if>
+			            <c:if test="${messageError != null}">
+				            <div class="alert alert-danger alert-dismissable">
+			   		            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				                ${messageError}
+				            </div>
+			            </c:if>
+			        </div>
+	        	</div>
+	        </div>
+		</div>
+	</c:if>
+
   <!-- FINAL NAV -->
 	<jsp:doBody />
 

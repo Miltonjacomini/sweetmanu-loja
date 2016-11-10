@@ -211,4 +211,43 @@ public class EmailSender {
 		return texto.toString();
 	}
 
+	public boolean emailContato(String nome, String email, String assunto, String mensagem) {
+		
+		try {
+			
+			MimeMessage message = sender.createMimeMessage();
+			Multipart multipart = new MimeMultipart("alternative");
+			BodyPart part = new MimeBodyPart();
+			part.setContent(getEmailContato(nome, email, assunto, mensagem), "text/html");
+			
+			multipart.addBodyPart(part);
+			message.setFrom(new InternetAddress("jacominimilton@gmail.com"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress("miltonjacomini@gmail.com"));
+			message.setSubject("[SweetManu - Pedido Cancelado]");
+			message.setContent(multipart);
+
+			sender.send(message);
+			return true;
+			
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+
+	private Object getEmailContato(String nome, String email, String assunto, String mensagem) {
+			StringBuilder texto = new StringBuilder();
+			texto.append("<html><body><h2>E-MAIL DE CONTATO!!!</h2><br/>");
+			texto.append("Informações sobre ele:</p>");
+			texto.append("<p>Quem enviou: " + nome + "</p><br/>");
+			texto.append("<p>E-mail: " + email + "</p><br/>");
+			texto.append("<p>Assunto: " + assunto + "</p><br/>");
+			texto.append("<p>Mensagem enviada: </p><br/><p>" + mensagem + "</p><br/>");
+			// Se fosse enviar o anexo
+			// texto.append("<img src='cid:arquivo' >");
+
+			return texto.toString();
+	}
+
 }
