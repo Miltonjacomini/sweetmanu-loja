@@ -62,6 +62,8 @@
 .slide-image {
 	width: 100%;
 	height: auto;
+	vertical-align: bottom;
+	text-align: center;
 }
 
 .div-img {
