@@ -33,6 +33,11 @@ public class HomeController {
 		return "sobreNos";
 	}
 	
+	@RequestMapping("/contato")
+	public String contato() {
+		return "contato";
+	}
+	
 	@RequestMapping(value="/403", method=RequestMethod.GET)
 	public ModelAndView acessoNegado(Principal user) {
 		ModelAndView model = new ModelAndView("403");
