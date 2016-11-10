@@ -58,12 +58,12 @@
 	width: 100%;
 	max-height: 350px;
 	overflow:hidden;
+	vertical-align: bottom;
+	text-align: center;
 }
 .slide-image {
 	width: 100%;
 	height: auto;
-	vertical-align: bottom;
-	text-align: center;
 }
 
 .div-img {
