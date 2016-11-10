@@ -39,7 +39,7 @@
                 <div class="nav-collapse">
                     <ul class="nav navbar-nav menu-text">
                         <li> <a href="<c:url value='/'/>">LOJA</a></li>
-                        <li> <a href="<c:url value='/quemSomos'/>">SOBRE NÓS</a></li>
+                        <li> <a href="<c:url value='/sobreNos'/>">SOBRE NÓS</a></li>
                         <li> <a href="<c:url value='/contato'/>">CONTATO</a></li>
                     </ul>
                 </div>
@@ -48,7 +48,7 @@
                	<div class="logout navbar-text pull-right">
 	                (
 	                <a href="<c:url value='/logout'/>"> 
-	        			logout
+	        			sair
 	        		</a>
 	        		)
         		</div>
@@ -59,6 +59,11 @@
                 <a href="<c:url value='/carrinho'/>">
                   <span class="navbar-text pull-right">CARRINHO</span>
                 </a>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+	               	<a href="<c:url value='/indexAdmin'/>">
+	                  <span class="navbar-text pull-right">ADMIN</span>
+	                </a>
+        		</sec:authorize>
             </div>
         </div>
     </div>
