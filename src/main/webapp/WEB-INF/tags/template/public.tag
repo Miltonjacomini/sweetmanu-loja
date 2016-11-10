@@ -38,9 +38,8 @@
 
                 <div class="nav-collapse">
                     <ul class="nav navbar-nav menu-text">
-                        <li> <a href="<c:url value='/'/>">HOME</a></li>
-                        <li> <a href="#">SOBRE NÓS</a></li>
-                        <li> <a href="#">LOJA</a></li>
+                        <li> <a href="<c:url value='/'/>">LOJA</a></li>
+                        <li> <a href="<c:url value='/quemSomos.jsp'/>">SOBRE NÓS</a></li>
                         <li> <a href="#">CONTATO</a></li>
                     </ul>
                 </div>
