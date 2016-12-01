@@ -26,14 +26,14 @@ Este sistema foi desenvolvido com o intuito de sanar os problemas enfrentados pe
 
 ##Informações para o setup
 
-**Banco de dados - ** [JPAConfiguration.java](https://github.com/Miltonjacomini/sweetmanu-loja/blob/master/src/main/java/br/com/sweetmanu/config/JPAConfiguration.java)
+**Banco de dados** - [JPAConfiguration.java](https://github.com/Miltonjacomini/sweetmanu-loja/blob/master/src/main/java/br/com/sweetmanu/config/JPAConfiguration.java)
 ```
 Os dados para configuração devem ser alterados: 
 - linhas 57 à 52, metodo: dataSource()
 // Lá encontrará configuração do Heroku e para ambiente de testes
 ```
 
-**AppWebConfiguration - ** [AppWebConfiguration.java](https://github.com/Miltonjacomini/sweetmanu-loja/blob/master/src/main/java/br/com/sweetmanu/config/AppWebConfiguration.java)
+**AppWebConfiguration** - [AppWebConfiguration.java](https://github.com/Miltonjacomini/sweetmanu-loja/blob/master/src/main/java/br/com/sweetmanu/config/AppWebConfiguration.java)
 ```
 Os dados para configuração devem ser alterados:   
 
@@ -46,4 +46,3 @@ commitar por engano... não sei quem fez isso mas só uma dica... rs //
 // Aqui a configuração somente mudará se você for utilziar algo foda do SendGrid e Heroku senão 
 está okay..//
 ```
-
