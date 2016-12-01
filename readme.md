@@ -34,14 +34,16 @@ os dados para configuração devem ser alterados:
 - linhas 57 à 52
 - metodo: dataSource()
 ```
+
+**AppWebConfiguration:** [AppWebConfiguration.java](https://github.com/Miltonjacomini/sweetmanu-loja/blob/master/src/main/java/br/com/sweetmanu/config/AppWebConfiguration.java)
 ```
-**AppWebConfiguration:** 
-Na classe [AppWebConfiguration.java](https://github.com/Miltonjacomini/sweetmanu-loja/blob/master/src/main/java/br/com/sweetmanu/config/AppWebConfiguration.java), </br>
-os dados para configuração devem ser alterados:   
+Os dados para configuração devem ser alterados:   
+
 - linhas 82 à 85, metodo: credentials() 
 // Configuração das variaveis de ambiente com usurio e senha do Amazon, 
 lembrete importante!! Não deixem o usuário e senha expostos nessa classe pois você pode
 commitar por engano... não sei quem fez isso mas só uma dica... rs //
+
 - linhas 93 à 108, metodo: javaMailSenderImpl()
 // Aqui a configuração somente mudará se você for utilziar algo foda do SendGrid e Heroku senão 
 está okay..//
